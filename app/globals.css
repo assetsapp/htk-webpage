@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, sans-serif;
+    background-color: #FAFAF7;
+    color: #1F2023;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1 {
+    font-size: clamp(36px, 4.5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    font-weight: 600;
+    color: #0B0B0C;
+  }
+
+  h2 {
+    font-size: clamp(28px, 3.5vw, 40px);
+    line-height: 1.1;
+    font-weight: 600;
+    color: #0B0B0C;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 24px;
+    line-height: 1.25;
+    font-weight: 600;
+    color: #0B0B0C;
+  }
+}
+
+@layer utilities {
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
+}
