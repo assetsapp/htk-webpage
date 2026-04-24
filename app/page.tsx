@@ -104,14 +104,7 @@ function Hero() {
           <div className="animate-float">
             <IcosahedronSVG size={420} />
           </div>
-          <div className="absolute bottom-8 left-8 bg-surface-raised border border-border-subtle rounded-card px-5 py-4 shadow-sm">
-            <p className="text-xs font-medium text-ink-300 uppercase tracking-wider mb-1">Plataforma</p>
-            <p className="text-sm font-medium text-ink">Tagventory</p>
-            <div className="flex items-center gap-1.5 mt-1.5">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-xs text-ink-300">Activo en tiempo real</span>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
