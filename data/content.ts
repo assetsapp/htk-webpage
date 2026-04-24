@@ -70,7 +70,7 @@ export const industries = [
     slug: 'gobierno',
     title: 'Gobierno',
     description: 'Registro y control de bienes patrimoniales con trazabilidad para auditoría.',
-    image: 'https://images.pexels.com/photos/13808918/pexels-photo-13808918.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/14766052/pexels-photo-14766052.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     slug: 'servicios-eventos',
