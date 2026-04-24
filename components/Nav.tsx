@@ -206,38 +206,20 @@ export default function Nav() {
 }
 
 function CasosDropdown({ items }: { items: { label: string; href: string; description: string; group?: string }[] }) {
-  const aplicacion = items.filter(i => i.group === 'Aplicación');
-  const exito = items.filter(i => i.group === 'Éxito');
-
   return (
-    <div className="grid grid-cols-2 min-w-[520px]">
-      <div className="p-3 border-r border-border-subtle">
-        <div className="px-1 pb-2 text-xs font-medium tracking-wider uppercase text-ink-300">Casos de Aplicación</div>
-        {aplicacion.map((item, i) => (
-          <Link
-            key={i}
-            href={item.href}
-            className="block px-3 py-2 text-sm text-ink-700 hover:text-brand hover:bg-surface-alt rounded-md transition-colors"
-          >
-            {item.label}
-          </Link>
-        ))}
-      </div>
-      <div className="p-3">
-        <div className="px-1 pb-2 text-xs font-medium tracking-wider uppercase text-ink-300">Casos de Éxito</div>
-        {exito.map((item, i) => (
-          <Link
-            key={i}
-            href={item.href}
-            className="block px-3 py-2 rounded-md hover:bg-surface-alt transition-colors group"
-          >
-            <div className="text-sm font-medium text-ink-700 group-hover:text-brand transition-colors">{item.label}</div>
-            {item.description && (
-              <div className="text-xs text-ink-300 mt-0.5 leading-snug line-clamp-1">{item.description}</div>
-            )}
-          </Link>
-        ))}
-      </div>
+    <div className="py-1">
+      {items.map((item, i) => (
+        <Link
+          key={i}
+          href={item.href}
+          className="block px-4 py-2.5 hover:bg-surface-alt transition-colors group"
+        >
+          <div className="text-sm font-medium text-ink group-hover:text-brand transition-colors">{item.label}</div>
+          {item.description && (
+            <div className="text-xs text-ink-300 mt-0.5 leading-snug">{item.description}</div>
+          )}
+        </Link>
+      ))}
     </div>
   );
 }

@@ -97,13 +97,6 @@ function Hero() {
             </Link>
           </div>
 
-          <div className="flex flex-wrap gap-2 mt-8">
-            {['Cinépolis', 'DHL', 'Palacio de Hierro', 'ZEISS', 'MetLife'].map((c) => (
-              <span key={c} className="text-xs font-medium text-ink-300 border border-border-subtle px-3 py-1 rounded-full bg-surface-raised">
-                {c}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div className="hidden lg:flex justify-center items-center relative">
@@ -191,7 +184,7 @@ function Problems() {
 // ── Capabilities ──────────────────────────────────────────────────────────────
 
 function Capabilities() {
-  const [open, setOpen] = useState(0);
+  const [active, setActive] = useState(0);
 
   return (
     <Section alt>
@@ -204,47 +197,74 @@ function Capabilities() {
       </div>
 
       <div className="grid lg:grid-cols-2 gap-12 items-start">
-        <div className="flex flex-col gap-2">
+        <div className="flex flex-col">
           {solutions.map((s, idx) => (
-            <div
+            <button
               key={s.slug}
-              className={`border rounded-card overflow-hidden transition-colors duration-200 ${
-                open === idx ? 'border-brand/30 bg-surface-raised' : 'border-border-subtle bg-surface-base'
+              onClick={() => setActive(idx)}
+              className={`group text-left flex gap-5 px-6 py-5 rounded-card transition-all duration-200 ${
+                active === idx
+                  ? 'bg-surface-raised border border-brand/20 shadow-sm'
+                  : 'border border-transparent hover:bg-surface-raised/60'
               }`}
             >
-              <button
-                className="w-full flex items-center justify-between px-6 py-4 text-left"
-                onClick={() => setOpen(open === idx ? -1 : idx)}
-              >
-                <span className={`text-sm font-medium transition-colors ${open === idx ? 'text-ink' : 'text-ink-700'}`}>
+              {/* Número indicador */}
+              <span className={`text-xs font-medium mt-0.5 w-6 flex-shrink-0 transition-colors ${
+                active === idx ? 'text-brand' : 'text-ink-300'
+              }`}>
+                0{idx + 1}
+              </span>
+
+              <div className="flex-1 min-w-0">
+                <p className={`text-sm font-semibold mb-1 transition-colors ${
+                  active === idx ? 'text-ink' : 'text-ink-700'
+                }`}>
                   {s.title}
-                </span>
-                <svg
-                  width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5"
-                  className={`flex-shrink-0 transition-transform duration-200 ${open === idx ? 'rotate-180 text-brand' : 'text-ink-300'}`}
-                >
-                  <path d="M4 6l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-              {open === idx && (
-                <div className="px-6 pb-5">
-                  <p className="text-sm font-medium text-brand mb-2">{s.tagline}</p>
-                  <p className="text-sm text-ink-500 leading-relaxed">{s.description}</p>
+                </p>
+                <p className={`text-sm leading-relaxed transition-colors ${
+                  active === idx ? 'text-ink-500' : 'text-ink-300'
+                }`}>
+                  {s.tagline}
+                </p>
+
+                {active === idx && (
                   <Link
                     href={`/soluciones/${s.slug}`}
-                    className="inline-flex items-center gap-1.5 text-sm font-medium text-ink hover:text-brand transition-colors mt-4"
+                    className="inline-flex items-center gap-1.5 text-sm font-medium text-brand hover:gap-3 transition-all mt-3"
+                    onClick={(e) => e.stopPropagation()}
                   >
                     Ver solución <ArrowRight />
                   </Link>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+
+              {/* Línea activa */}
+              <div className={`w-0.5 rounded-full flex-shrink-0 self-stretch transition-all duration-300 ${
+                active === idx ? 'bg-brand' : 'bg-transparent'
+              }`} />
+            </button>
           ))}
+
+          {/* CTA diagnóstico — rellena el espacio inferior */}
+          <div className="mt-3 mx-1 flex-1">
+            <Link
+              href="/diagnostico"
+              className="flex items-center justify-between gap-4 px-6 py-5 rounded-card border border-dashed border-brand/30 bg-brand-tint50 hover:bg-brand-tint100 hover:border-brand/50 transition-all duration-200 group"
+            >
+              <div>
+                <p className="text-xs font-medium uppercase tracking-wider text-brand mb-1">¿No identificas el problema?</p>
+                <p className="text-sm text-ink-500 leading-snug">Solicita un diagnóstico gratuito de tu operación.</p>
+              </div>
+              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center group-hover:bg-brand/20 transition-colors">
+                <ArrowRight size={13} />
+              </span>
+            </Link>
+          </div>
         </div>
 
         <div className="sticky top-24">
-          <div className="bg-surface-raised border border-border-subtle rounded-block p-8">
-            <p className="text-xs font-medium tracking-widest uppercase text-ink-300 mb-8">Flujo de control HTK</p>
+          <div className="bg-surface-raised border border-border-subtle rounded-block p-6">
+            <p className="text-xs font-medium tracking-widest uppercase text-ink-300 mb-4">Flujo de control HTK</p>
 
             <div className="flex flex-col gap-0">
               {[
@@ -255,16 +275,16 @@ function Capabilities() {
                 { step: '05', label: 'Dashboard', sub: 'Tagventory — visibilidad en tiempo real', color: 'bg-brand/10' },
               ].map((item, i, arr) => (
                 <div key={i} className="relative">
-                  <div className={`flex items-center gap-4 p-4 rounded-xl ${item.color}`}>
-                    <span className="text-xs font-medium text-ink-300 w-8">{item.step}</span>
+                  <div className={`flex items-center gap-3 px-3 py-2.5 rounded-lg ${item.color}`}>
+                    <span className="text-xs font-medium text-ink-300 w-6 flex-shrink-0">{item.step}</span>
                     <div>
-                      <p className="text-sm font-medium text-ink">{item.label}</p>
-                      <p className="text-xs text-ink-300 mt-0.5">{item.sub}</p>
+                      <p className="text-sm font-medium text-ink leading-tight">{item.label}</p>
+                      <p className="text-xs text-ink-300">{item.sub}</p>
                     </div>
                   </div>
                   {i < arr.length - 1 && (
-                    <div className="flex justify-center py-1">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#9A9CA2" strokeWidth="1.5">
+                    <div className="flex justify-center py-0.5">
+                      <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="#9A9CA2" strokeWidth="1.5">
                         <path d="M8 3v10M4 9l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </div>
@@ -273,7 +293,7 @@ function Capabilities() {
               ))}
             </div>
 
-            <div className="mt-6 pt-4 border-t border-border-subtle text-center">
+            <div className="mt-4 pt-4 border-t border-border-subtle text-center">
               <Link
                 href="/demo-tagventory"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
@@ -327,16 +347,14 @@ function Industries() {
           </Link>
         ))}
 
+      </div>
+
+      <div className="text-center mt-8">
         <Link
           href="/industrias/salud"
-          className="group flex flex-col items-center justify-center rounded-card border border-dashed border-brand/40 bg-brand-tint50 h-52 transition-all duration-200 hover:bg-brand-tint100 hover:border-brand/60"
+          className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-500 hover:text-brand transition-colors"
         >
-          <div className="w-10 h-10 rounded-full border-2 border-brand flex items-center justify-center mb-3">
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="#F79A3F" strokeWidth="1.5">
-              <path d="M8 3v10M3 8h10" strokeLinecap="round" />
-            </svg>
-          </div>
-          <span className="text-sm font-medium text-brand">Ver todas las industrias</span>
+          Ver todas las industrias <ArrowRight size={13} />
         </Link>
       </div>
     </Section>
@@ -346,11 +364,9 @@ function Industries() {
 // ── Case Applications (Tabs) ──────────────────────────────────────────────────
 
 function CaseApplications() {
-  const [activeTab, setActiveTab] = useState(0);
-
-  const tabsData = icps.map((icp) => ({
+  const featured = icps.map((icp) => ({
     icp,
-    cases: caseApplications.filter((c) => c.icpSlug === icp.slug),
+    case: caseApplications.find((c) => c.icpSlug === icp.slug),
   }));
 
   return (
@@ -359,79 +375,25 @@ function CaseApplications() {
         <Eyebrow>En la operación real</Eyebrow>
         <h2 className="mb-4">Cómo se ve esto en la operación real.</h2>
         <p className="text-[17px] text-ink-500 max-w-2xl mx-auto">
-          Ejemplos concretos de cómo los problemas de activos, trazabilidad y control aparecen en el día a día.
+          Ejemplos concretos de cómo los problemas de activos, trazabilidad y control aparecen en el día a día de distintas operaciones.
         </p>
       </div>
 
-      <div className="flex flex-wrap gap-2 mb-8">
-        {tabsData.map((t, idx) => (
-          <button
-            key={idx}
-            onClick={() => setActiveTab(idx)}
-            className={`px-4 py-2 text-sm font-medium rounded-btn transition-all duration-200 ${
-              activeTab === idx
-                ? 'bg-brand text-surface-dark'
-                : 'bg-surface-raised border border-border-subtle text-ink-500 hover:text-ink hover:border-ink-300'
-            }`}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+        {featured.map(({ icp, case: c }) => (
+          <Link
+            key={icp.slug}
+            href={c ? `/casos-aplicacion/${c.slug}` : '#'}
+            className="group flex flex-col p-6 bg-surface-raised border border-border-subtle rounded-card transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-sm"
           >
-            {t.icp.title}
-          </button>
+            <span className="text-xs font-medium tracking-wider uppercase text-brand mb-3">{icp.title}</span>
+            <h3 className="text-base font-medium text-ink-700 leading-snug flex-1">{c?.title}</h3>
+            <span className="text-sm font-medium text-brand flex items-center gap-1.5 group-hover:gap-2.5 transition-all mt-4">
+              Ver caso <ArrowRight />
+            </span>
+          </Link>
         ))}
       </div>
-
-      {tabsData[activeTab] && (
-        <div className="grid lg:grid-cols-3 gap-5">
-          {tabsData[activeTab].cases.slice(0, 1).map((c) => (
-            <Link
-              key={c.slug}
-              href={`/casos-aplicacion/${c.slug}`}
-              className="lg:col-span-2 group p-8 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all duration-200"
-            >
-              <div className="inline-flex items-center gap-2 px-3 py-1 bg-brand-tint50 border border-brand-tint100 rounded-full text-xs font-medium text-brand mb-4">
-                {tabsData[activeTab].icp.title}
-              </div>
-              <h3 className="text-xl font-medium text-ink mb-3">{c.title}</h3>
-              <p className="text-[15px] text-ink-500 leading-relaxed mb-6">{c.description}</p>
-              <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
-                Ver caso de aplicación <ArrowRight />
-              </span>
-            </Link>
-          ))}
-
-          <div className="flex flex-col gap-4">
-            {tabsData[activeTab].cases.slice(1, 3).map((c) => (
-              <Link
-                key={c.slug}
-                href={`/casos-aplicacion/${c.slug}`}
-                className="group p-5 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all duration-200"
-              >
-                <h3 className="text-sm font-medium text-ink mb-2">{c.title}</h3>
-                <p className="text-xs text-ink-300 leading-relaxed mb-3 line-clamp-2">{c.description}</p>
-                <span className="inline-flex items-center gap-1 text-xs font-medium text-brand">
-                  Ver más <ArrowRight size={12} />
-                </span>
-              </Link>
-            ))}
-
-            {tabsData[activeTab].cases.length === 0 && (
-              <div className="p-5 bg-surface-base border border-border-subtle rounded-card">
-                <p className="text-sm text-ink-300">Casos adicionales disponibles próximamente.</p>
-              </div>
-            )}
-
-            <Link
-              href="/diagnostico"
-              className="p-5 bg-brand-tint50 border border-brand-tint100 rounded-card hover:bg-brand-tint100 transition-colors"
-            >
-              <p className="text-xs font-medium text-brand uppercase tracking-wider mb-2">¿Tu caso?</p>
-              <p className="text-sm font-medium text-ink mb-3">Analiza si aplica a tu operación</p>
-              <span className="inline-flex items-center gap-1 text-xs font-medium text-brand">
-                Solicitar diagnóstico <ArrowRight size={12} />
-              </span>
-            </Link>
-          </div>
-        </div>
-      )}
     </Section>
   );
 }
@@ -439,7 +401,32 @@ function CaseApplications() {
 // ── Success Stats ─────────────────────────────────────────────────────────────
 
 function SuccessStats() {
-  const stats = caseSuccesses.slice(0, 4);
+  const cards = [
+    {
+      sector: 'Retail',
+      metric: '+25,000',
+      metricLabel: 'activos conciliados',
+      result: 'Activos conciliados sin discrepancias a nivel nacional.',
+    },
+    {
+      sector: 'Manufactura / IMMEX',
+      metric: '0',
+      metricLabel: 'sanciones en auditoría',
+      result: 'Cumplimiento total en auditoría sin sanciones ni hallazgos.',
+    },
+    {
+      sector: 'Salud',
+      metric: 'Real-time',
+      metricLabel: 'visibilidad operativa',
+      result: 'Disponibilidad operativa de activos críticos en tiempo real.',
+    },
+    {
+      sector: 'Logística',
+      metric: '-30%',
+      metricLabel: 'pérdidas de activos',
+      result: 'Reducción del 30% en pérdidas de activos en operación.',
+    },
+  ];
 
   return (
     <Section>
@@ -452,23 +439,16 @@ function SuccessStats() {
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-        {stats.map((cs) => (
-          <Link
-            key={cs.slug}
-            href={`/casos-exito/${cs.slug}`}
-            className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all duration-200"
+        {cards.map((card) => (
+          <div
+            key={card.sector}
+            className="p-6 bg-surface-raised border border-border-subtle rounded-card"
           >
-            <div className="text-3xl font-medium text-brand mb-1">{cs.metric}</div>
-            <div className="text-xs font-medium text-ink-300 uppercase tracking-wider mb-3">{cs.metricLabel}</div>
-            <p className="text-sm font-medium text-ink mb-2">{cs.client}</p>
-            <p className="text-xs text-ink-300 leading-snug mb-4">{cs.result}</p>
-            <div className="flex items-center justify-between">
-              <span className="text-xs font-medium text-ink-300 border border-border-subtle px-2 py-0.5 rounded-full">{cs.sector}</span>
-              <span className="text-xs text-brand opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
-                Ver caso <ArrowRight size={12} />
-              </span>
-            </div>
-          </Link>
+            <p className="text-sm font-semibold text-ink mb-4">Cliente {card.sector}</p>
+            <div className="text-3xl font-medium text-brand mb-1">{card.metric}</div>
+            <div className="text-xs font-medium text-ink-300 uppercase tracking-wider mb-3">{card.metricLabel}</div>
+            <p className="text-xs text-ink-300 leading-snug">{card.result}</p>
+          </div>
         ))}
       </div>
 
@@ -477,7 +457,7 @@ function SuccessStats() {
           href="/casos-exito/cinepolis"
           className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
         >
-          Ver todos los casos de éxito <ArrowRight />
+          Ver casos de éxito <ArrowRight />
         </Link>
       </div>
     </Section>
