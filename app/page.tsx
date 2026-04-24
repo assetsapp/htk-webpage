@@ -246,21 +246,6 @@ function Capabilities() {
             </button>
           ))}
 
-          {/* CTA diagnóstico — rellena el espacio inferior */}
-          <div className="mt-3 mx-1 flex-1">
-            <Link
-              href="/diagnostico"
-              className="flex items-center justify-between gap-4 px-6 py-5 rounded-card border border-dashed border-brand/30 bg-brand-tint50 hover:bg-brand-tint100 hover:border-brand/50 transition-all duration-200 group"
-            >
-              <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-brand mb-1">¿No identificas el problema?</p>
-                <p className="text-sm text-ink-500 leading-snug">Solicita un diagnóstico gratuito de tu operación.</p>
-              </div>
-              <span className="flex-shrink-0 w-8 h-8 rounded-full bg-brand/10 flex items-center justify-center group-hover:bg-brand/20 transition-colors">
-                <ArrowRight size={13} />
-              </span>
-            </Link>
-          </div>
         </div>
 
         <div className="sticky top-24">
