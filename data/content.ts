@@ -59,19 +59,19 @@ export const industries = [
     slug: 'retail-corporativos',
     title: 'Retail y Corporativos',
     description: 'Inventarios precisos y activos asignados en múltiples sucursales.',
-    image: 'https://images.pexels.com/photos/264636/pexels-photo-264636.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     slug: 'gobierno',
     title: 'Gobierno',
     description: 'Registro y control de bienes patrimoniales con trazabilidad para auditoría.',
-    image: 'https://images.pexels.com/photos/1468379/pexels-photo-1468379.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/13808918/pexels-photo-13808918.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
   {
     slug: 'servicios-eventos',
     title: 'Servicios y Eventos',
     description: 'Control de activos en movimiento: escenarios, equipos y mobiliario.',
-    image: 'https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=800',
+    image: 'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=800',
   },
 ];
 
