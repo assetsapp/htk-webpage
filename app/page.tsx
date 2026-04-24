@@ -391,9 +391,9 @@ function Industries() {
       <div className="text-center mt-8">
         <Link
           href="/industrias/salud"
-          className="inline-flex items-center gap-1.5 text-sm font-medium text-ink-500 hover:text-brand transition-colors"
+          className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
         >
-          Ver todas las industrias <ArrowRight size={13} />
+          Ver todas las industrias <ArrowRight />
         </Link>
       </div>
     </Section>
@@ -613,20 +613,6 @@ function DarkCTA() {
           >
             Agendar demo Tagventory
           </Link>
-        </div>
-
-        <div className="flex flex-wrap justify-center gap-8 mt-14 pt-10 border-t border-white/10">
-          {[
-            { metric: '+200', label: 'Proyectos completados' },
-            { metric: '12+', label: 'Clientes enterprise' },
-            { metric: '10 años', label: 'Experiencia en LATAM' },
-            { metric: 'Tagventory', label: 'Plataforma propia' },
-          ].map((item) => (
-            <div key={item.label} className="text-center">
-              <p className="text-2xl font-medium text-white">{item.metric}</p>
-              <p className="text-xs text-white/40 mt-1 tracking-wide">{item.label}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
