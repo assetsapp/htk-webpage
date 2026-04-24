@@ -155,7 +155,7 @@ function Problems() {
             <div className="w-10 h-10 rounded-lg bg-brand-tint50 flex items-center justify-center text-brand mb-4">
               {icpIcon(icp.icon)}
             </div>
-            <span className="text-xs font-medium tracking-wider uppercase text-brand mb-2">{icp.title}</span>
+            <span className="text-sm font-semibold tracking-wider uppercase text-brand mb-2">{icp.title}</span>
             <h3 className="text-base font-medium text-ink-700 leading-snug mb-3 flex-1">{icp.headline}</h3>
             <p className="text-sm text-ink-300 leading-relaxed mb-4 line-clamp-3">{icp.description}</p>
             <span className="text-sm font-medium text-brand flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
