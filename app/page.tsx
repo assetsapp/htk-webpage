@@ -155,9 +155,9 @@ function Problems() {
             <div className="w-10 h-10 rounded-lg bg-brand-tint50 flex items-center justify-center text-brand mb-4">
               {icpIcon(icp.icon)}
             </div>
-            <span className="text-sm font-semibold tracking-wider uppercase text-brand mb-2">{icp.title}</span>
+            <span className="text-base font-bold tracking-wider uppercase text-brand mb-2">{icp.title}</span>
             <h3 className="text-base font-medium text-ink-700 leading-snug mb-3 flex-1">{icp.headline}</h3>
-            <p className="text-sm text-ink-300 leading-relaxed mb-4 line-clamp-3">{icp.description}</p>
+            <p className="text-sm text-ink-300 leading-relaxed mb-4">{icp.description}</p>
             <span className="text-sm font-medium text-brand flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
               Ver problema <ArrowRight />
             </span>
@@ -203,7 +203,7 @@ function Capabilities() {
               </span>
 
               <div className="flex-1 min-w-0">
-                <p className={`text-sm font-semibold mb-1 transition-colors ${
+                <p className={`text-base font-semibold mb-1 transition-colors ${
                   active === idx ? 'text-ink' : 'text-ink-700'
                 }`}>
                   {s.title}
@@ -270,7 +270,7 @@ function Capabilities() {
                 href="/demo-tagventory"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
-                Ver demo Tagventory <ArrowRight />
+                Realizar autodiagnóstico <ArrowRight />
               </Link>
             </div>
           </div>
