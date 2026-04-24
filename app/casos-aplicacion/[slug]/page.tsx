@@ -14,8 +14,8 @@ export function generateStaticParams() {
   return caseApplications.map((c) => ({ slug: c.slug }));
 }
 
-export default function CaseApplicationPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function CaseApplicationPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const caseApp = caseApplications.find((c) => c.slug === slug);
 
   if (!caseApp) notFound();
