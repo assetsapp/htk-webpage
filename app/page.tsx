@@ -419,7 +419,8 @@ function CaseApplications() {
             className="group flex flex-col p-6 bg-surface-raised border border-border-subtle rounded-card transition-all duration-200 hover:-translate-y-0.5 hover:border-brand/30 hover:shadow-sm"
           >
             <span className="text-xs font-medium tracking-wider uppercase text-brand mb-3">{icp.title}</span>
-            <h3 className="text-base font-medium text-ink-700 leading-snug flex-1">{c?.title}</h3>
+            <h3 className="text-base font-medium text-ink-700 leading-snug mb-3">{c?.title}</h3>
+            <p className="text-sm text-ink-300 leading-relaxed flex-1">{icp.scenarioDescription}</p>
             <span className="text-sm font-medium text-brand flex items-center gap-1.5 group-hover:gap-2.5 transition-all mt-4">
               Ver caso <ArrowRight />
             </span>

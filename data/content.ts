@@ -4,6 +4,7 @@ export const icps = [
     title: 'Conciliación',
     headline: 'Tus activos no coinciden con tus registros',
     description: 'Cuando revisas inventarios o finanzas, los números no cuadran y no sabes por qué.',
+    scenarioDescription: 'Inventarios físicos contra ERP que no coinciden entre sedes, sistemas o responsables.',
     icon: 'scale',
   },
   {
@@ -11,6 +12,7 @@ export const icps = [
     title: 'Cumplimiento',
     headline: 'No puedes demostrar control ante auditorías',
     description: 'En auditorías, no puedes demostrar con claridad qué tienes ni qué ha pasado con tus activos.',
+    scenarioDescription: 'Auditorías donde falta información, evidencia o trazabilidad de los activos.',
     icon: 'shield',
   },
   {
@@ -18,6 +20,7 @@ export const icps = [
     title: 'Control',
     headline: 'No sabes quién tiene tus activos ni dónde están',
     description: 'Los activos se mueven sin control y no tienes certeza de quién los tiene ni dónde están.',
+    scenarioDescription: 'Activos que cambian de ubicación o usuario sin registro claro ni seguimiento.',
     icon: 'map-pin',
   },
   {
@@ -25,6 +28,7 @@ export const icps = [
     title: 'Disponibilidad',
     headline: 'Tus activos no están disponibles cuando los necesitas',
     description: 'Cuando necesitas un activo, no aparece, no está listo o no está donde debería.',
+    scenarioDescription: 'Equipos que deberían estar operando, pero no se encuentran o no están listos.',
     icon: 'clock',
   },
   {
@@ -32,6 +36,7 @@ export const icps = [
     title: 'Automatización',
     headline: 'Tus procesos siguen siendo manuales y fragmentados',
     description: 'Dependes de Excel y procesos manuales que generan errores, retrabajo y pérdida de información.',
+    scenarioDescription: 'Procesos que dependen de capturas manuales y sistemas que no están conectados.',
     icon: 'cpu',
   },
 ];
