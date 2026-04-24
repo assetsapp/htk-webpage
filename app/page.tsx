@@ -305,9 +305,9 @@ function PlatformMicro() {
           {steps.map((step, i) => (
             <div key={step.id} className="flex flex-col md:flex-row items-center">
               <div className="flex flex-col items-center text-center px-6 py-4 min-w-[160px]">
-                <span className="text-xs font-medium text-brand/60 mb-2">{step.id}</span>
-                <span className="text-lg font-medium text-white mb-1">{step.label}</span>
-                <span className="text-xs text-white/40 max-w-[120px] leading-relaxed">{step.desc}</span>
+                <span className="text-xs font-medium text-brand mb-2">{step.id}</span>
+                <span className="text-lg font-semibold text-white mb-1">{step.label}</span>
+                <span className="text-sm text-white/80 max-w-[120px] leading-relaxed">{step.desc}</span>
               </div>
               {i < steps.length - 1 && (
                 <div className="text-brand/40 mx-1 hidden md:block">
