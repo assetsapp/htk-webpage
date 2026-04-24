@@ -29,6 +29,9 @@ yarn-error.log*
 # Vercel
 .vercel
 
+# Cursor / Claude worktrees
+.claude/
+
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
