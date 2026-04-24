@@ -89,21 +89,15 @@ function Hero() {
               Solicitar diagnóstico
               <ArrowRight />
             </Link>
-            <Link
-              href="/soluciones/identificacion-inteligente"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn transition-all duration-200 hover:bg-surface-alt"
+            <a
+              href="#plataforma"
+              onClick={(e) => { e.preventDefault(); document.getElementById('plataforma')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn transition-all duration-200 hover:bg-surface-alt cursor-pointer"
             >
               Ver cómo funciona
-            </Link>
+            </a>
           </div>
 
-          <div className="flex flex-wrap gap-2 mt-8">
-            {['Cinépolis', 'DHL', 'Palacio de Hierro', 'ZEISS', 'MetLife'].map((c) => (
-              <span key={c} className="text-xs font-medium text-ink-300 border border-border-subtle px-3 py-1 rounded-full bg-surface-raised">
-                {c}
-              </span>
-            ))}
-          </div>
         </div>
 
         <div className="hidden lg:flex justify-center items-center relative">
@@ -133,7 +127,7 @@ function LogoCarousel() {
     <div className="bg-surface-raised border-y border-border-subtle py-8">
       <div className="max-w-8xl mx-auto px-6 md:px-10 mb-5">
         <p className="text-xs font-medium text-ink-300 text-center tracking-wider">
-          Empresas que ya controlan sus activos con HTK
+          Empresas que ya operan con HTK
         </p>
       </div>
       <div className="overflow-hidden">
@@ -288,6 +282,66 @@ function Capabilities() {
   );
 }
 
+// ── Platform Micro Block ──────────────────────────────────────────────────────
+
+function PlatformMicro() {
+  const steps = [
+    { id: '01', label: 'Identificas', desc: 'Cada activo reconocido de forma inequívoca' },
+    { id: '02', label: 'Controlas', desc: 'Asignación, movimientos y responsables' },
+    { id: '03', label: 'Visualizas', desc: 'Dashboard en tiempo real' },
+    { id: '04', label: 'Integras', desc: 'ERP, SAP y sistemas contables' },
+    { id: '05', label: 'Automatizas', desc: 'Flujos sin intervención manual' },
+  ];
+
+  return (
+    <section id="plataforma" className="bg-surface-dark py-20">
+      <div className="max-w-8xl mx-auto px-6 md:px-10">
+        <div className="text-center mb-12">
+          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Cómo funciona como sistema</p>
+          <h2 className="text-white max-w-2xl mx-auto">
+            Un sistema que conecta todo el ciclo de tus activos.
+          </h2>
+        </div>
+
+        <div className="flex flex-col md:flex-row items-center justify-center gap-0 mb-12">
+          {steps.map((step, i) => (
+            <div key={step.id} className="flex flex-col md:flex-row items-center">
+              <div className="flex flex-col items-center text-center px-6 py-4 min-w-[160px]">
+                <span className="text-xs font-medium text-brand/60 mb-2">{step.id}</span>
+                <span className="text-lg font-medium text-white mb-1">{step.label}</span>
+                <span className="text-xs text-white/40 max-w-[120px] leading-relaxed">{step.desc}</span>
+              </div>
+              {i < steps.length - 1 && (
+                <div className="text-brand/40 mx-1 hidden md:block">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M5 10h10M11 6l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              )}
+              {i < steps.length - 1 && (
+                <div className="text-brand/40 my-1 md:hidden">
+                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.5">
+                    <path d="M10 5v10M6 11l4 4 4-4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Link
+            href="/demo-tagventory"
+            className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
+          >
+            Ver cómo funciona la plataforma <ArrowRight />
+          </Link>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 // ── Industries ────────────────────────────────────────────────────────────────
 
 function Industries() {
@@ -439,7 +493,8 @@ function CaseApplications() {
 // ── Success Stats ─────────────────────────────────────────────────────────────
 
 function SuccessStats() {
-  const stats = caseSuccesses.slice(0, 4);
+  const [showAll, setShowAll] = useState(false);
+  const visible = showAll ? caseSuccesses : caseSuccesses.slice(0, 6);
 
   return (
     <Section>
@@ -447,12 +502,12 @@ function SuccessStats() {
         <Eyebrow>Resultados reales</Eyebrow>
         <h2 className="mb-4">Resultados reales en operación.</h2>
         <p className="text-[17px] text-ink-500 max-w-2xl mx-auto">
-          Experiencias y resultados que muestran cómo este sistema se traduce en control, cumplimiento y visibilidad real.
+          Casos reales donde empresas resolvieron problemas críticos de control, disponibilidad, trazabilidad y automatización.
         </p>
       </div>
 
-      <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-10">
-        {stats.map((cs) => (
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-10">
+        {visible.map((cs) => (
           <Link
             key={cs.slug}
             href={`/casos-exito/${cs.slug}`}
@@ -473,12 +528,21 @@ function SuccessStats() {
       </div>
 
       <div className="text-center">
-        <Link
-          href="/casos-exito/cinepolis"
-          className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
-        >
-          Ver todos los casos de éxito <ArrowRight />
-        </Link>
+        {!showAll ? (
+          <button
+            onClick={() => setShowAll(true)}
+            className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
+          >
+            Ver todos los casos de éxito <ArrowRight />
+          </button>
+        ) : (
+          <button
+            onClick={() => setShowAll(false)}
+            className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
+          >
+            Ver menos
+          </button>
+        )}
       </div>
     </Section>
   );
@@ -609,6 +673,7 @@ export default function Home() {
       <LogoCarousel />
       <Problems />
       <Capabilities />
+      <PlatformMicro />
       <Industries />
       <CaseApplications />
       <SuccessStats />
