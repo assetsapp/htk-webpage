@@ -131,7 +131,7 @@ function LogoCarousel() {
         </p>
       </div>
       <div className="overflow-hidden">
-        <div className="flex gap-0 pause-on-hover" style={{ width: 'max-content', animation: 'scrollLogos 40s linear infinite' }}>
+        <div className="flex gap-0 pause-on-hover animate-scroll-logos" style={{ width: 'max-content' }}>
           {repeated.map((name, i) => (
             <div
               key={i}
@@ -468,7 +468,7 @@ function SuccessStats() {
   return (
     <Section>
       <div className="text-center mb-12">
-        <Eyebrow>Resultados reales</Eyebrow>
+        <Eyebrow>Casos de éxito</Eyebrow>
         <h2 className="mb-4">Resultados reales en operación.</h2>
         <p className="text-[17px] text-ink-500 max-w-2xl mx-auto">
           Casos reales donde empresas resolvieron problemas críticos de control, disponibilidad, trazabilidad y automatización.
@@ -480,12 +480,40 @@ function SuccessStats() {
           <Link
             key={cs.slug}
             href={`/casos-exito/${cs.slug}`}
-            className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all duration-200"
+            className="group flex flex-col p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all duration-200"
           >
-            <p className="text-sm font-semibold text-ink mb-4">Cliente {cs.sector}</p>
-            <div className="text-3xl font-medium text-brand mb-1">{cs.metric}</div>
-            <div className="text-xs font-medium text-ink-300 uppercase tracking-wider mb-3">{cs.metricLabel}</div>
-            <p className="text-xs text-ink-300 leading-snug">{cs.result}</p>
+            {/* Logo + nombre */}
+            <div className="flex items-center gap-3 mb-5">
+              <div
+                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                style={{ backgroundColor: cs.color + '18' }}
+              >
+                <span
+                  className="text-xs font-bold tracking-wide"
+                  style={{ color: cs.color }}
+                >
+                  {cs.initials}
+                </span>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-ink leading-tight">{cs.client}</p>
+                <p className="text-xs text-ink-300 mt-0.5">{cs.sector}</p>
+              </div>
+            </div>
+
+            {/* Resultado */}
+            <p className="text-sm text-ink-500 leading-relaxed flex-1">{cs.result}</p>
+
+            {/* Métrica */}
+            <div className="flex items-center justify-between mt-5 pt-4 border-t border-border-subtle">
+              <div>
+                <span className="text-xl font-semibold text-brand">{cs.metric}</span>
+                <span className="text-xs text-ink-300 ml-2">{cs.metricLabel}</span>
+              </div>
+              <span className="text-xs text-brand opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1">
+                Ver caso <ArrowRight size={12} />
+              </span>
+            </div>
           </Link>
         ))}
       </div>

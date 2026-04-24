@@ -179,6 +179,8 @@ export const caseSuccesses = [
   {
     slug: 'cinepolis',
     client: 'Cinépolis',
+    initials: 'CI',
+    color: '#E31837',
     sector: 'Entretenimiento / Retail',
     result: 'Conciliación nacional y reducción de más del 90% en tiempo de auditoría',
     metric: '+90%',
@@ -189,6 +191,8 @@ export const caseSuccesses = [
   {
     slug: 'grupo-gia',
     client: 'Grupo GIA',
+    initials: 'GIA',
+    color: '#005A9C',
     sector: 'Salud',
     result: 'Disponibilidad total de activos médicos en hospital de alta especialidad',
     metric: '100%',
@@ -199,7 +203,9 @@ export const caseSuccesses = [
   {
     slug: 'abc-queretaro',
     client: 'ABC Querétaro',
-    sector: 'Logística',
+    initials: 'ABC',
+    color: '#00843D',
+    sector: 'Salud',
     result: 'Automatización del flujo de contenedores y eliminación de recompra',
     metric: '0',
     metricLabel: 'recompras no planeadas',
@@ -209,6 +215,8 @@ export const caseSuccesses = [
   {
     slug: 'vidrio-formas',
     client: 'Vidrio Formas',
+    initials: 'VF',
+    color: '#0072CE',
     sector: 'Manufactura',
     result: 'Trazabilidad completa e integración con sistema WMS',
     metric: '100%',
@@ -219,6 +227,8 @@ export const caseSuccesses = [
   {
     slug: 'fresenius-kabi',
     client: 'Fresenius Kabi',
+    initials: 'FK',
+    color: '#007A33',
     sector: 'Salud',
     result: 'Control y localización de activos en múltiples hospitales',
     metric: 'Multi-site',
@@ -229,6 +239,8 @@ export const caseSuccesses = [
   {
     slug: 'xisoem',
     client: 'XISOEM',
+    initials: 'XIS',
+    color: '#6B21A8',
     sector: 'Operación Distribuida',
     result: 'Control de activos en operación distribuida con visibilidad total',
     metric: '+100%',
@@ -239,6 +251,8 @@ export const caseSuccesses = [
   {
     slug: 'validacion-ia',
     client: 'Validación con IA',
+    initials: 'IA',
+    color: '#B45309',
     sector: 'Manufactura',
     result: 'Automatización de inspección y control de calidad con inteligencia artificial',
     metric: 'IA',
@@ -249,6 +263,8 @@ export const caseSuccesses = [
   {
     slug: 'monitoreo-neonatos',
     client: 'Monitoreo de Neonatos',
+    initials: 'MN',
+    color: '#0891B2',
     sector: 'Salud Crítica',
     result: 'Seguridad crítica en tiempo real para pacientes neonatos',
     metric: 'Real-time',
