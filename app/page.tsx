@@ -524,7 +524,7 @@ function Resources() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+      <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {[
           {
             href: '/recursos/calculadora-perdidas-activos',
@@ -536,6 +536,20 @@ function Resources() {
               <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#F79A3F" strokeWidth="1.5" strokeLinecap="round">
                 <rect x="5" y="3" width="18" height="22" rx="2" />
                 <path d="M9 9h10M9 13h6M9 17h10M9 21h6" />
+              </svg>
+            ),
+          },
+          {
+            href: '/diagnostico',
+            label: 'Autodiagnóstico',
+            title: '¿Tienes control real de tus activos?',
+            description: 'Responde unas preguntas rápidas y descubre qué tan expuesta está tu operación a pérdidas, errores y falta de control.',
+            cta: 'Realizar autodiagnóstico',
+            icon: (
+              <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="#F79A3F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="14" cy="14" r="10" />
+                <path d="M14 10v4l3 3" />
+                <path d="M10 6.5l1.5 1.5M18 6.5l-1.5 1.5" />
               </svg>
             ),
           },
@@ -586,26 +600,20 @@ function DarkCTA() {
       </div>
 
       <div className="relative max-w-8xl mx-auto px-6 md:px-10 text-center">
-        <p className="text-xs font-medium tracking-widest uppercase text-brand mb-6">Control total</p>
+        <p className="text-sm font-bold tracking-widest uppercase text-brand mb-6">Control total</p>
         <h2 className="text-white mb-5 max-w-2xl mx-auto">
-          Si no puedes confiar en tus activos, no puedes confiar en tu operación.
+          Si no puedes confiar en tus datos, no puedes confiar en tu operación.
         </h2>
         <p className="text-[17px] text-white/60 max-w-xl mx-auto mb-10">
           Identifica dónde está el problema y cómo resolverlo.
         </p>
 
-        <div className="flex flex-wrap gap-4 justify-center">
+        <div className="flex justify-center">
           <Link
             href="/diagnostico"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />
-          </Link>
-          <Link
-            href="/demo-tagventory"
-            className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
-          >
-            Agendar demo Tagventory
           </Link>
         </div>
       </div>
