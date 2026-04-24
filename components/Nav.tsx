@@ -68,7 +68,7 @@ export default function Nav() {
       <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-16" ref={dropdownRef}>
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <img src="/logo_colores.png" alt="HTK Identificación Inteligente" className="h-9 w-auto" />
+          <img src="/htk-logo-navbar.svg" alt="HTK Identificación Inteligente" className="h-14 w-auto" />
         </Link>
 
         {/* Desktop nav */}

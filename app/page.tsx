@@ -89,13 +89,6 @@ function Hero() {
               Solicitar diagnóstico
               <ArrowRight />
             </Link>
-            <a
-              href="#plataforma"
-              onClick={(e) => { e.preventDefault(); document.getElementById('plataforma')?.scrollIntoView({ behavior: 'smooth' }); }}
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn transition-all duration-200 hover:bg-surface-alt cursor-pointer"
-            >
-              Ver cómo funciona
-            </a>
           </div>
 
         </div>
@@ -119,8 +112,8 @@ function LogoCarousel() {
   return (
     <div className="bg-surface-raised border-y border-border-subtle py-8">
       <div className="max-w-8xl mx-auto px-6 md:px-10 mb-5">
-        <p className="text-xs font-medium text-ink-300 text-center tracking-wider">
-          Empresas que ya operan con HTK
+        <p className="text-xs font-medium tracking-widest uppercase text-brand text-center mb-0">
+          Más de 15 años trabajando con empresas como:
         </p>
       </div>
       <div className="overflow-hidden">

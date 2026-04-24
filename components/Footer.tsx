@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Col 1: Navegación general */}
           <div>
             <div className="mb-6">
-              <img src="/logo_colores.png" alt="HTK" className="h-8 w-auto mb-4" />
+              <img src="/htk-logo-navbar.svg" alt="HTK" className="h-14 w-auto mb-4" />
               <p className="text-sm text-ink-500 leading-relaxed">
                 Identificación inteligente de activos para empresas que necesitan control, trazabilidad y confianza en su operación.
               </p>
@@ -111,8 +111,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-border-subtle">
         <div className="max-w-8xl mx-auto px-6 md:px-10 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <img src="/logo_colores.png" alt="HTK" className="h-6 w-auto" />
-          <p className="text-xs text-ink-300">© HTK 2026. Todos los derechos reservados.</p>
+<p className="text-xs text-ink-300">© HTK 2026. Todos los derechos reservados.</p>
           <Link href="/aviso-de-privacidad" className="text-xs text-ink-300 hover:text-brand transition-colors">
             Aviso de privacidad
           </Link>
