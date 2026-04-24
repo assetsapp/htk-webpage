@@ -42,8 +42,8 @@ export function generateStaticParams() {
   return caseSuccesses.map((c) => ({ slug: c.slug }));
 }
 
-export default function CaseSuccessPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function CaseSuccessPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const cs = caseSuccesses.find((c) => c.slug === slug);
 
   if (!cs) notFound();
