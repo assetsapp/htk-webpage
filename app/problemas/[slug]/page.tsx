@@ -14,8 +14,8 @@ export function generateStaticParams() {
   return icps.map((icp) => ({ slug: icp.slug }));
 }
 
-export default function ICPPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function ICPPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const icp = icps.find((i) => i.slug === slug);
 
   if (!icp) notFound();

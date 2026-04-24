@@ -22,8 +22,8 @@ export function generateStaticParams() {
   return solutions.map((s) => ({ slug: s.slug }));
 }
 
-export default function SolutionPage({ params }: { params: { slug: string } }) {
-  const { slug } = params;
+export default async function SolutionPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
   const solution = solutions.find((s) => s.slug === slug);
 
   if (!solution) notFound();
