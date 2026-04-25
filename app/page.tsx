@@ -456,10 +456,7 @@ function SuccessStats() {
           >
             {/* Logo + nombre */}
             <div className="flex items-center gap-3 mb-5">
-              <div
-                className="w-20 h-14 rounded-lg flex items-center justify-center flex-shrink-0 p-2"
-                style={{ backgroundColor: cs.color + '18' }}
-              >
+              <div className="w-20 h-14 rounded-lg flex items-center justify-center flex-shrink-0 p-2 bg-white border border-border-subtle">
                 {cs.logo ? (
                   <img src={cs.logo} alt={cs.client} className="w-full h-full object-contain" />
                 ) : (
