@@ -65,10 +65,10 @@ export default function Nav() {
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-16" ref={dropdownRef}>
+      <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-20" ref={dropdownRef}>
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <img src="/htk-logo-navbar.svg" alt="HTK Identificación Inteligente" className="h-14 w-auto" />
+          <img src="/htk-logo-navbar.svg" alt="HTK Identificación Inteligente" className="h-16 w-auto" />
         </Link>
 
         {/* Desktop nav */}
