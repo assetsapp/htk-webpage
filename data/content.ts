@@ -288,8 +288,8 @@ export const caseSuccesses = [
 export const clients = [
   { name: 'Cinépolis', logo: '/empresas/cinepolis-logo.svg' },
   { name: 'Grupo GIA', logo: '/empresas/gia-logo.svg', size: 'h-14' },
-  { name: 'ABC Querétaro', logo: '/empresas/abc-technologies-logo.svg', size: 'h-14' },
-  { name: 'Vidrio Formas', logo: '/empresas/vidrio-formas-logo.svg', size: 'h-14' },
+  { name: 'ABC Querétaro', logo: '/empresas/abc-technologies-logo.svg', size: 'h-16' },
+  { name: 'Vidrio Formas', logo: '/empresas/vidrio-formas-logo.svg', size: 'h-16' },
   { name: 'Fresenius Kabi', logo: '/empresas/fresenius-kabi-logo.svg', size: 'h-14' },
   { name: 'XISOEM', logo: '/empresas/xisoem-logo.svg' },
   { name: 'ISSSTE', logo: '/empresas/issste-logo.svg' },
