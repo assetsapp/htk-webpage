@@ -69,7 +69,7 @@ function Hero() {
 
       <div className="max-w-8xl mx-auto px-6 md:px-10 grid lg:grid-cols-2 gap-12 items-center">
         <div className="max-w-2xl">
-          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-6">
+          <p className="text-sm font-bold tracking-widest uppercase text-brand mb-6">
             Identificación Inteligente de Activos
           </p>
 
@@ -112,7 +112,7 @@ function LogoCarousel() {
   return (
     <div className="bg-surface-raised border-y border-border-subtle py-8">
       <div className="max-w-8xl mx-auto px-6 md:px-10 mb-5">
-        <p className="text-xs font-medium tracking-widest uppercase text-brand text-center mb-0">
+        <p className="text-sm font-bold tracking-widest uppercase text-brand text-center mb-0">
           Más de 15 años trabajando con empresas como:
         </p>
       </div>
@@ -295,7 +295,7 @@ function PlatformMicro() {
     <section id="plataforma" className="bg-surface-dark py-20">
       <div className="max-w-8xl mx-auto px-6 md:px-10">
         <div className="text-center mb-12">
-          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Cómo funciona como sistema</p>
+          <p className="text-sm font-bold tracking-widest uppercase text-brand mb-4">Cómo funciona como sistema</p>
           <h2 className="text-white max-w-2xl mx-auto">
             Un sistema que conecta todo el ciclo de tus activos.
           </h2>
