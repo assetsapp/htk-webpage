@@ -185,6 +185,7 @@ export const caseSuccesses = [
     slug: 'cinepolis',
     client: 'Cinépolis',
     initials: 'CI',
+    logo: '/empresas/cinepolis-logo.svg',
     color: '#E31837',
     sector: 'Entretenimiento / Retail',
     result: 'Redujo más del 90% el tiempo de auditoría en +400 sedes.',
@@ -197,6 +198,7 @@ export const caseSuccesses = [
     slug: 'grupo-gia',
     client: 'Grupo GIA',
     initials: 'GIA',
+    logo: '/empresas/gia-logo.svg',
     color: '#005A9C',
     sector: 'Salud',
     result: 'Garantizó la disponibilidad total de activos médicos en operación crítica.',
@@ -209,6 +211,7 @@ export const caseSuccesses = [
     slug: 'abc-queretaro',
     client: 'ABC Querétaro',
     initials: 'ABC',
+    logo: '/empresas/abc-technologies-logo.svg',
     color: '#00843D',
     sector: 'Salud',
     result: 'Eliminó la recompra de contenedores y automatizó su flujo logístico.',
@@ -221,6 +224,7 @@ export const caseSuccesses = [
     slug: 'vidrio-formas',
     client: 'Vidrio Formas',
     initials: 'VF',
+    logo: '/empresas/vidrio-formas-logo.svg',
     color: '#0072CE',
     sector: 'Manufactura',
     result: 'Logró trazabilidad total de producción integrada a su operación.',
@@ -233,6 +237,7 @@ export const caseSuccesses = [
     slug: 'fresenius-kabi',
     client: 'Fresenius Kabi',
     initials: 'FK',
+    logo: '/empresas/fresenius-kabi-logo.svg',
     color: '#007A33',
     sector: 'Salud',
     result: 'Localiza equipos críticos en minutos dentro de hospitales complejos.',
@@ -245,6 +250,7 @@ export const caseSuccesses = [
     slug: 'xisoem',
     client: 'XISOEM',
     initials: 'XIS',
+    logo: '/empresas/xisoem-logo.svg',
     color: '#6B21A8',
     sector: 'Operación Distribuida',
     result: 'Recuperó control sobre activos distribuidos en múltiples campamentos.',
@@ -280,9 +286,15 @@ export const caseSuccesses = [
 ];
 
 export const clients = [
-  'Cinépolis', 'Fresenius Kabi', 'Zurich', 'Peñafiel',
-  'Original Resorts', 'TV Azteca', 'ISSSTE', 'Grupo GIA',
-  'ABC Querétaro', 'Vidrio Formas', 'XISOEM', 'Original Resorts',
+  { name: 'Cinépolis', logo: '/empresas/cinepolis-logo.svg' },
+  { name: 'Grupo GIA', logo: '/empresas/gia-logo.svg', size: 'h-14' },
+  { name: 'ABC Querétaro', logo: '/empresas/abc-technologies-logo.svg', size: 'h-14' },
+  { name: 'Vidrio Formas', logo: '/empresas/vidrio-formas-logo.svg', size: 'h-14' },
+  { name: 'Fresenius Kabi', logo: '/empresas/fresenius-kabi-logo.svg', size: 'h-14' },
+  { name: 'XISOEM', logo: '/empresas/xisoem-logo.svg' },
+  { name: 'ISSSTE', logo: '/empresas/issste-logo.svg' },
+  { name: 'Original Resorts', logo: '/empresas/original-resorts-logo.svg' },
+  { name: 'TV Azteca', logo: '/empresas/tvazteca-logo.svg', size: 'h-14' },
 ];
 
 export const navItems = [

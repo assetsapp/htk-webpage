@@ -118,12 +118,12 @@ function LogoCarousel() {
       </div>
       <div className="overflow-hidden">
         <div className="flex gap-0 pause-on-hover animate-scroll-logos" style={{ width: 'max-content' }}>
-          {repeated.map((name, i) => (
+          {repeated.map((client, i) => (
             <div
               key={i}
-              className="flex items-center justify-center px-10 min-w-[160px] h-12"
+              className="flex items-center justify-center px-10 min-w-[160px] h-14"
             >
-              <span className="text-sm font-medium text-ink-300 whitespace-nowrap tracking-wide">{name}</span>
+              <img src={client.logo} alt={client.name} className={`${client.size ?? 'h-10'} w-auto object-contain opacity-60 hover:opacity-100 transition-opacity`} />
             </div>
           ))}
         </div>
@@ -457,15 +457,16 @@ function SuccessStats() {
             {/* Logo + nombre */}
             <div className="flex items-center gap-3 mb-5">
               <div
-                className="w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0"
+                className="w-20 h-14 rounded-lg flex items-center justify-center flex-shrink-0 p-2"
                 style={{ backgroundColor: cs.color + '18' }}
               >
-                <span
-                  className="text-xs font-bold tracking-wide"
-                  style={{ color: cs.color }}
-                >
-                  {cs.initials}
-                </span>
+                {cs.logo ? (
+                  <img src={cs.logo} alt={cs.client} className="w-full h-full object-contain" />
+                ) : (
+                  <span className="text-xs font-bold tracking-wide" style={{ color: cs.color }}>
+                    {cs.initials}
+                  </span>
+                )}
               </div>
               <div>
                 <p className="text-sm font-semibold text-ink leading-tight">{cs.client}</p>
