@@ -54,7 +54,7 @@ function Section({ children, className = '', alt = false }: { children: React.Re
 }
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
-  return <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">{children}</p>;
+  return <p className="text-sm font-bold tracking-widest uppercase text-brand mb-4">{children}</p>;
 }
 
 // ── Hero ──────────────────────────────────────────────────────────────────────
