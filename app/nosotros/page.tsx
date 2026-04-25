@@ -135,8 +135,8 @@ export default function Nosotros() {
           <h2 className="text-center mb-12">Empresas que confían en HTK</h2>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {clients.map((c) => (
-              <div key={c} className="flex items-center justify-center h-16 bg-surface-raised border border-border-subtle rounded-card">
-                <span className="text-sm font-medium text-ink-300">{c}</span>
+              <div key={c.name} className="flex items-center justify-center h-16 bg-surface-raised border border-border-subtle rounded-card">
+                <span className="text-sm font-medium text-ink-300">{c.name}</span>
               </div>
             ))}
           </div>
