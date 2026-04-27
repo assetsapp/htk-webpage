@@ -46,37 +46,37 @@ export const industries = [
     slug: 'salud',
     title: 'Salud',
     description: 'Equipos médicos trazados, disponibles y en cumplimiento normativo.',
-    image: 'https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/236380/pexels-photo-236380.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
   {
     slug: 'manufactura-immex',
     title: 'Manufactura / IMMEX',
     description: 'Control de activos fijos y cumplimiento del Anexo 24 sin papel.',
-    image: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/1108101/pexels-photo-1108101.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
   {
     slug: 'logistica-transporte',
     title: 'Logística y Transporte',
     description: 'Trazabilidad de contenedores, flotas y activos retornables en tiempo real.',
-    image: 'https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/1427107/pexels-photo-1427107.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
   {
     slug: 'retail-corporativos',
     title: 'Retail y Corporativos',
     description: 'Inventarios precisos y activos asignados en múltiples sucursales.',
-    image: 'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/380769/pexels-photo-380769.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
   {
     slug: 'gobierno',
     title: 'Gobierno',
     description: 'Registro y control de bienes patrimoniales con trazabilidad para auditoría.',
-    image: 'https://images.pexels.com/photos/14766052/pexels-photo-14766052.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/14766052/pexels-photo-14766052.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
   {
     slug: 'servicios-eventos',
     title: 'Servicios y Eventos',
     description: 'Control de activos en movimiento: escenarios, equipos y mobiliario.',
-    image: 'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=400',
+    image: 'https://images.pexels.com/photos/2608517/pexels-photo-2608517.jpeg?auto=compress&cs=tinysrgb&w=400&fm=webp',
   },
 ];
 
