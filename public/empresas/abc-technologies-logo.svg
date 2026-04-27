@@ -1,34 +1,5 @@
-<svg class="cliente-logo-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 520" role="img" aria-label="ABC Technologies">
-  <title>ABC Technologies</title>
-
-  <!-- Símbolo A recreado en vector -->
-  <g transform="translate(230 55)">
-    <path fill="#ED1B2F" d="M150 0 L285 205 H222 L150 92 L78 205 H15 Z"/>
-    <path fill="#7A0C0C" d="M150 92 L222 205 H160 L135 165 L110 205 H78 Z"/>
-    <path fill="#ED1B2F" d="M150 0 L285 205 H222 L150 92 Z" opacity="0.95"/>
-    <path fill="#7A0C0C" d="M150 92 L207 178 H149 L132 205 H78 Z"/>
-  </g>
-
-  <!-- Texto principal -->
-  <text x="380" y="385"
-    text-anchor="middle"
-    font-family="Arial Black, Impact, Arial, Helvetica, sans-serif"
-    font-size="72"
-    font-weight="900"
-    letter-spacing="-2"
-    fill="#000000">
+<svg xmlns="http://www.w3.org/2000/svg" aria-label="ABC Technologies" class="cliente-logo-svg" viewBox="0 0 760 520"><title>ABC Technologies</title><path fill="#ed1b2f" d="m380 55 135 205h-63l-72-113-72 113h-63Z"/><path fill="#7a0c0c" d="m380 147 72 113h-62l-25-40-25 40h-32Z"/><path fill="#ed1b2f" d="m380 55 135 205h-63l-72-113Z" opacity=".95"/><path fill="#7a0c0c" d="m380 147 57 86h-58l-17 27h-54Z"/><text x="380" y="385" font-family="Arial Black, Impact, Arial, Helvetica, sans-serif" font-size="72" font-weight="900" letter-spacing="-2" text-anchor="middle">
     ABC TECHNOLOGIES
-  </text>
-
-  <!-- Subtítulo -->
-  <text x="380" y="445"
-    text-anchor="middle"
-    font-family="Arial, Helvetica, sans-serif"
-    font-size="27"
-    font-style="italic"
-    font-weight="500"
-    letter-spacing="8"
-    fill="#000000">
+  </text><text x="380" y="445" font-family="Arial, Helvetica, sans-serif" font-size="27" font-style="italic" font-weight="500" letter-spacing="8" text-anchor="middle">
     INNOVATION IN PLASTICS &amp; LIGHTWEIGHTING
-  </text>
-</svg>
+  </text></svg>

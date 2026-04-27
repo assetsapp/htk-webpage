@@ -185,7 +185,7 @@ export const caseSuccesses = [
     slug: 'cinepolis',
     client: 'Cinépolis',
     initials: 'CI',
-    logo: '/empresas/cinepolis-logo.svg',
+    logo: '/empresas/cinepolis-logo.webp',
     color: '#E31837',
     sector: 'Entretenimiento / Retail',
     result: 'Redujo más del 90% el tiempo de auditoría en +400 sedes.',
@@ -198,7 +198,7 @@ export const caseSuccesses = [
     slug: 'grupo-gia',
     client: 'Grupo GIA',
     initials: 'GIA',
-    logo: '/empresas/gia-logo.svg',
+    logo: '/empresas/gia-logo.webp',
     color: '#005A9C',
     sector: 'Salud',
     result: 'Garantizó la disponibilidad total de activos médicos en operación crítica.',
@@ -224,7 +224,7 @@ export const caseSuccesses = [
     slug: 'vidrio-formas',
     client: 'Vidrio Formas',
     initials: 'VF',
-    logo: '/empresas/vidrio-formas-logo.svg',
+    logo: '/empresas/vidrio-formas-logo.webp',
     color: '#0072CE',
     sector: 'Manufactura',
     result: 'Logró trazabilidad total de producción integrada a su operación.',
@@ -250,7 +250,7 @@ export const caseSuccesses = [
     slug: 'xisoem',
     client: 'XISOEM',
     initials: 'XIS',
-    logo: '/empresas/xisoem-logo.svg',
+    logo: '/empresas/xisoem-logo.webp',
     color: '#6B21A8',
     sector: 'Operación Distribuida',
     result: 'Recuperó control sobre activos distribuidos en múltiples campamentos.',
@@ -286,15 +286,15 @@ export const caseSuccesses = [
 ];
 
 export const clients = [
-  { name: 'Cinépolis', logo: '/empresas/cinepolis-logo.svg' },
-  { name: 'Grupo GIA', logo: '/empresas/gia-logo.svg', size: 'h-8' },
+  { name: 'Cinépolis', logo: '/empresas/cinepolis-logo.webp' },
+  { name: 'Grupo GIA', logo: '/empresas/gia-logo.webp', size: 'h-8' },
   { name: 'ABC Querétaro', logo: '/empresas/abc-technologies-logo.svg', size: 'h-16' },
-  { name: 'Vidrio Formas', logo: '/empresas/vidrio-formas-logo.svg', size: 'h-16' },
+  { name: 'Vidrio Formas', logo: '/empresas/vidrio-formas-logo.webp', size: 'h-16' },
   { name: 'Fresenius Kabi', logo: '/empresas/fresenius-kabi-logo.svg', size: 'h-14' },
-  { name: 'XISOEM', logo: '/empresas/xisoem-logo.svg' },
-  { name: 'ISSSTE', logo: '/empresas/issste-logo.svg' },
-  { name: 'Original Resorts', logo: '/empresas/original-resorts-logo.svg' },
-  { name: 'TV Azteca', logo: '/empresas/tvazteca-logo.svg', size: 'h-14' },
+  { name: 'XISOEM', logo: '/empresas/xisoem-logo.webp' },
+  { name: 'ISSSTE', logo: '/empresas/issste-logo.webp' },
+  { name: 'Original Resorts', logo: '/empresas/original-resorts-logo.webp' },
+  { name: 'TV Azteca', logo: '/empresas/tvazteca-logo.webp', size: 'h-14' },
 ];
 
 export const navItems = [

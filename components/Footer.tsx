@@ -9,7 +9,7 @@ export default function Footer() {
           {/* Col 1: Navegación general */}
           <div>
             <div className="mb-6">
-              <img src="/htk-logo-navbar.svg" alt="HTK" className="h-14 w-auto mb-4" />
+              <img src="/htk-logo-navbar.webp" alt="HTK" className="h-14 w-auto mb-4" />
               <p className="text-sm text-ink-500 leading-relaxed">
                 Identificación inteligente de activos para empresas que necesitan control, trazabilidad y confianza en su operación.
               </p>
