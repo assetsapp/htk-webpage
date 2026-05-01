@@ -10,6 +10,14 @@ function ArrowRight({ size = 14 }: { size?: number }) {
   );
 }
 
+function CheckIcon() {
+  return (
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" stroke="currentColor" strokeWidth="1.5">
+      <path d="M2.5 7l3 3 6-6" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
 export function generateStaticParams() {
   return industries.map((ind) => ({ slug: ind.slug }));
 }
@@ -20,14 +28,36 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   if (!industry) notFound();
 
-  const relatedCases = caseApplications.filter((c) => c.industrySlug === industry.slug);
+  const hasRichContent = 'heroHeadline' in industry;
+
+  // Cases: use caseSlugs if defined, else fall back to industrySlug filter
+  const relatedCases = hasRichContent && 'caseSlugs' in industry && industry.caseSlugs
+    ? (industry.caseSlugs as string[]).map((s) => caseApplications.find((c) => c.slug === s)).filter(Boolean)
+    : caseApplications.filter((c) => c.industrySlug === industry.slug);
+
   const relatedSuccess = caseSuccesses.filter((c) => c.industrySlug === industry.slug);
-  const relatedICPs = icps.slice(0, 3);
-  const relatedSolutions = solutions.slice(0, 3);
+
+  // ICPs: use icpItems if defined, else generic slice
+  const icpItems = hasRichContent && 'icpItems' in industry && industry.icpItems
+    ? (industry.icpItems as { slug: string; note: string }[]).map((item) => ({
+        ...item,
+        icp: icps.find((i) => i.slug === item.slug),
+      })).filter((i) => i.icp)
+    : icps.slice(0, 3).map((icp) => ({ slug: icp.slug, note: icp.description, icp }));
+
+  // Solutions: use solutionSlugs if defined, else generic slice
+  const relatedSolutions = hasRichContent && 'solutionSlugs' in industry && industry.solutionSlugs
+    ? (industry.solutionSlugs as string[]).map((s) => solutions.find((sol) => sol.slug === s)).filter(Boolean)
+    : solutions.slice(0, 3);
+
+  const heroHeadline = hasRichContent && 'heroHeadline' in industry ? industry.heroHeadline as string : industry.title;
+  const heroSubheadline = hasRichContent && 'heroSubheadline' in industry ? industry.heroSubheadline as string : industry.description;
+  const ctaHeadline = hasRichContent && 'ctaHeadline' in industry ? industry.ctaHeadline as string : `¿Tu empresa está en ${industry.title}?`;
+  const ctaSubtext = hasRichContent && 'ctaSubtext' in industry ? industry.ctaSubtext as string : 'Agenda un diagnóstico sin costo para entender cuál es tu nivel de control actual y qué puedes mejorar.';
 
   return (
     <>
-      {/* Hero with industry image */}
+      {/* Hero */}
       <section className="relative bg-surface-dark pt-28 pb-24 overflow-hidden">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
@@ -47,10 +77,8 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
           </div>
 
           <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Industria</p>
-          <h1 className="text-white max-w-2xl mb-5">{industry.title}</h1>
-          <p className="text-[17px] text-white/70 leading-relaxed mb-8 max-w-xl">
-            {industry.description} Cada sector tiene sus propios desafíos de control, cumplimiento y trazabilidad de activos.
-          </p>
+          <h1 className="text-white max-w-2xl mb-5">{heroHeadline}</h1>
+          <p className="text-[17px] text-white/70 leading-relaxed mb-8 max-w-xl">{heroSubheadline}</p>
 
           <div className="flex flex-wrap gap-3">
             <Link
@@ -69,27 +97,64 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      {/* Problems in this industry */}
+      {/* Contexto de la industria */}
+      {'contextTitle' in industry && industry.contextTitle && (
+        <section className="bg-surface-alt py-20">
+          <div className="max-w-8xl mx-auto px-6 md:px-10">
+            <div className="grid md:grid-cols-2 gap-12 items-start">
+              <div>
+                <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Contexto</p>
+                <h2 className="mb-6">{industry.contextTitle as string}</h2>
+                <p className="text-[17px] text-ink-500 leading-relaxed mb-2">{industry.contextText as string}</p>
+              </div>
+              <div className="p-6 bg-surface-raised border border-border-subtle rounded-card">
+                <ul className="space-y-3 mb-6">
+                  {(industry.contextItems as string[]).map((item) => (
+                    <li key={item} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
+                        <CheckIcon />
+                      </span>
+                      <span className="text-sm text-ink-500 leading-relaxed">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+                {'contextFooter' in industry && industry.contextFooter && (
+                  <p className="text-sm text-ink-500 leading-relaxed border-l-2 border-brand/30 pl-4">
+                    {industry.contextFooter as string}
+                  </p>
+                )}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Problemas en esta industria */}
       <section className="bg-surface-base py-20">
         <div className="max-w-8xl mx-auto px-6 md:px-10">
           <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Problemática del sector</p>
-          <h2 className="mb-4">Problemas comunes en {industry.title}</h2>
+          <h2 className="mb-4">
+            {'problemsTitle' in industry && industry.problemsTitle
+              ? industry.problemsTitle as string
+              : `Problemas comunes en ${industry.title}`}
+          </h2>
           <p className="text-[17px] text-ink-500 mb-10 max-w-2xl">
-            El control de activos en este sector enfrenta retos únicos. Estos son los más frecuentes.
+            {'problemsText' in industry && industry.problemsText
+              ? industry.problemsText as string
+              : 'El control de activos en este sector enfrenta retos únicos. Estos son los más frecuentes.'}
           </p>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {relatedICPs.map((icp) => (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+            {icpItems.map(({ slug: icpSlug, note, icp }) => icp && (
               <Link
-                key={icp.slug}
-                href={`/problemas/${icp.slug}`}
-                className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
+                key={icpSlug}
+                href={`/problemas/${icpSlug}`}
+                className="group p-5 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
               >
-                <span className="text-xs font-medium tracking-wider uppercase text-brand block mb-3">{icp.title}</span>
-                <h3 className="text-base font-medium text-ink mb-3 leading-snug">{icp.headline}</h3>
-                <p className="text-sm text-ink-300 leading-relaxed mb-4 line-clamp-2">{icp.description}</p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
-                  Ver problema <ArrowRight />
+                <span className="text-xs font-medium tracking-wider uppercase text-brand block mb-2">{icp.title}</span>
+                <p className="text-sm text-ink-700 font-medium leading-snug mb-3">{note}</p>
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-brand group-hover:gap-2.5 transition-all">
+                  Ver problema <ArrowRight size={12} />
                 </span>
               </Link>
             ))}
@@ -97,47 +162,76 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </div>
       </section>
 
-      {/* Solutions */}
-      <section className="bg-surface-alt py-20">
-        <div className="max-w-8xl mx-auto px-6 md:px-10">
-          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Nuestras capacidades</p>
-          <h2 className="mb-10">Soluciones para {industry.title}</h2>
-          <div className="grid md:grid-cols-3 gap-5">
-            {relatedSolutions.map((s) => (
-              <Link
-                key={s.slug}
-                href={`/soluciones/${s.slug}`}
-                className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
-              >
-                <h3 className="text-base font-medium text-ink mb-2">{s.title}</h3>
-                <p className="text-sm font-medium text-brand mb-3">{s.tagline}</p>
-                <p className="text-sm text-ink-500 leading-relaxed mb-4">{s.description}</p>
-                <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
-                  Ver solución <ArrowRight />
-                </span>
-              </Link>
-            ))}
+      {/* Impacto */}
+      {'impactGroups' in industry && industry.impactGroups && (
+        <section className="bg-surface-alt py-20">
+          <div className="max-w-8xl mx-auto px-6 md:px-10">
+            <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Impacto</p>
+            <h2 className="mb-4">{industry.impactTitle as string}</h2>
+            {'impactText' in industry && industry.impactText && (
+              <p className="text-[17px] text-ink-500 mb-10 max-w-2xl">{industry.impactText as string}</p>
+            )}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 mt-8">
+              {(industry.impactGroups as { category: string; items: string[] }[]).map((group) => (
+                <div key={group.category} className="p-5 bg-surface-raised border border-border-subtle rounded-card">
+                  <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">{group.category}</p>
+                  <ul className="space-y-2">
+                    {group.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm text-ink-500 leading-relaxed">
+                        <span className="mt-1.5 flex-shrink-0 w-1.5 h-1.5 rounded-full bg-red-400" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
-      {/* Application cases */}
-      {relatedCases.length > 0 && (
+      {/* Cómo se vive por área */}
+      {'profiles' in industry && industry.profiles && (
         <section className="bg-surface-base py-20">
           <div className="max-w-8xl mx-auto px-6 md:px-10">
+            <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Por área</p>
+            <h2 className="mb-10">Este problema impacta directamente la operación clínica</h2>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+              {(industry.profiles as { role: string; quote: string }[]).map((profile) => (
+                <div key={profile.role} className="p-5 bg-surface-raised border border-border-subtle rounded-card">
+                  <p className="text-xs font-medium text-brand mb-3">{profile.role}</p>
+                  <p className="text-sm text-ink-500 leading-relaxed italic">&ldquo;{profile.quote}&rdquo;</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Casos de aplicación */}
+      {relatedCases.length > 0 && (
+        <section className="bg-surface-alt py-20">
+          <div className="max-w-8xl mx-auto px-6 md:px-10">
             <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Casos de aplicación</p>
-            <h2 className="mb-10">Implementaciones en {industry.title}</h2>
-            <div className="grid md:grid-cols-2 gap-5">
-              {relatedCases.map((c) => (
+            <h2 className="mb-4">
+              {'casesTitle' in industry && industry.casesTitle
+                ? industry.casesTitle as string
+                : `Implementaciones en ${industry.title}`}
+            </h2>
+            {'casesText' in industry && industry.casesText && (
+              <p className="text-[17px] text-ink-500 mb-10 max-w-2xl">{industry.casesText as string}</p>
+            )}
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {relatedCases.map((c) => c && (
                 <Link
                   key={c.slug}
                   href={`/casos-aplicacion/${c.slug}`}
-                  className="group p-7 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
+                  className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
                 >
-                  <h3 className="text-lg font-medium text-ink mb-3">{c.title}</h3>
-                  <p className="text-sm text-ink-500 leading-relaxed mb-5">{c.description}</p>
+                  <h3 className="text-base font-medium text-ink mb-2">{c.title}</h3>
+                  <p className="text-sm text-ink-500 leading-relaxed mb-4 line-clamp-3">{c.description}</p>
                   <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
-                    Ver caso de aplicación <ArrowRight />
+                    Ver caso <ArrowRight />
                   </span>
                 </Link>
               ))}
@@ -146,34 +240,102 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         </section>
       )}
 
-      {/* Success */}
-      {relatedSuccess.length > 0 && (
+      {/* Cómo lo resuelve HTK */}
+      <section className="bg-surface-base py-20">
+        <div className="max-w-8xl mx-auto px-6 md:px-10">
+          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Cómo lo resolvemos</p>
+          <h2 className="mb-4">
+            {'solutionTitle' in industry && industry.solutionTitle
+              ? industry.solutionTitle as string
+              : `La solución HTK para ${industry.title}`}
+          </h2>
+          {'solutionText' in industry && industry.solutionText && (
+            <p className="text-[17px] text-ink-500 mb-10 max-w-2xl">{industry.solutionText as string}</p>
+          )}
+
+          <div className="grid md:grid-cols-2 gap-10">
+            {'capabilities' in industry && industry.capabilities && (
+              <div>
+                <p className="text-xs font-medium tracking-widest uppercase text-ink-300 mb-5">Capacidades clave en esta industria</p>
+                <ul className="space-y-3">
+                  {(industry.capabilities as string[]).map((cap) => (
+                    <li key={cap} className="flex items-center gap-3">
+                      <span className="flex-shrink-0 w-5 h-5 rounded-full bg-brand/10 border border-brand/20 flex items-center justify-center text-brand">
+                        <CheckIcon />
+                      </span>
+                      <span className="text-sm text-ink-700">{cap}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <div>
+              <p className="text-xs font-medium tracking-widest uppercase text-ink-300 mb-5">Soluciones relacionadas</p>
+              <div className="space-y-4">
+                {relatedSolutions.map((s) => s && (
+                  <Link
+                    key={s.slug}
+                    href={`/soluciones/${s.slug}`}
+                    className="group flex items-start gap-4 p-4 border border-border-subtle rounded-card bg-surface-raised hover:border-brand/30 hover:shadow-sm transition-all"
+                  >
+                    <div className="flex-1">
+                      <h3 className="text-sm font-medium text-ink mb-1">{s.title}</h3>
+                      <p className="text-sm text-ink-300 leading-relaxed">{s.tagline}</p>
+                    </div>
+                    <span className="mt-1 text-brand group-hover:translate-x-1 transition-transform">
+                      <ArrowRight />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Casos de éxito */}
+      {('industrySuccessCards' in industry && industry.industrySuccessCards
+        ? true
+        : relatedSuccess.length > 0) && (
         <section className="bg-surface-alt py-20">
           <div className="max-w-8xl mx-auto px-6 md:px-10">
             <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Evidencia</p>
-            <h2 className="mb-10">Clientes en {industry.title}</h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {relatedSuccess.map((cs) => (
-                <Link
-                  key={cs.slug}
-                  href={`/casos-exito/${cs.slug}`}
-                  className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
-                >
-                  <div className="text-2xl font-medium text-brand mb-1">{cs.metric}</div>
-                  <div className="text-xs font-medium text-ink-300 mb-3">{cs.metricLabel}</div>
-                  <p className="text-sm font-medium text-ink mb-1">{cs.client}</p>
-                  <p className="text-sm text-ink-300 mb-4">{cs.result}</p>
-                  <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
-                    Ver caso de éxito <ArrowRight />
-                  </span>
-                </Link>
-              ))}
-            </div>
+            <h2 className="mb-10">Instituciones que pasaron de buscar equipos a tenerlos disponibles</h2>
+            {'industrySuccessCards' in industry && industry.industrySuccessCards ? (
+              <div className="grid md:grid-cols-3 gap-5">
+                {(industry.industrySuccessCards as { client: string; metric: string; metricLabel: string }[]).map((card) => (
+                  <div key={card.client} className="p-6 bg-surface-raised border border-border-subtle rounded-card">
+                    <div className="text-3xl font-medium text-brand mb-1">{card.metric}</div>
+                    <div className="text-xs font-medium text-ink-300 mb-3">{card.metricLabel}</div>
+                    <p className="text-sm font-medium text-ink">{card.client}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                {relatedSuccess.map((cs) => (
+                  <Link
+                    key={cs.slug}
+                    href={`/casos-exito/${cs.slug}`}
+                    className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all"
+                  >
+                    <div className="text-2xl font-medium text-brand mb-1">{cs.metric}</div>
+                    <div className="text-xs font-medium text-ink-300 mb-3">{cs.metricLabel}</div>
+                    <p className="text-sm font-medium text-ink mb-1">{cs.client}</p>
+                    <p className="text-sm text-ink-300 mb-4">{cs.result}</p>
+                    <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
+                      Ver caso de éxito <ArrowRight />
+                    </span>
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </section>
       )}
 
-      {/* Other industries */}
+      {/* Otras industrias */}
       <section className="bg-surface-base py-20">
         <div className="max-w-8xl mx-auto px-6 md:px-10">
           <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Otros sectores</p>
@@ -196,16 +358,22 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
       <section className="bg-surface-dark py-24">
         <div className="max-w-8xl mx-auto px-6 md:px-10 text-center">
           <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Siguiente paso</p>
-          <h2 className="text-white mb-4">¿Tu empresa está en {industry.title}?</h2>
-          <p className="text-[17px] text-white/60 max-w-xl mx-auto mb-8">
-            Agenda un diagnóstico sin costo para entender cuál es tu nivel de control actual y qué puedes mejorar.
-          </p>
-          <Link
-            href="/diagnostico"
-            className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
-          >
-            Solicitar diagnóstico <ArrowRight />
-          </Link>
+          <h2 className="text-white mb-4">{ctaHeadline}</h2>
+          <p className="text-[17px] text-white/60 max-w-xl mx-auto mb-8">{ctaSubtext}</p>
+          <div className="flex flex-wrap gap-4 justify-center">
+            <Link
+              href="/diagnostico"
+              className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
+            >
+              Solicitar diagnóstico <ArrowRight />
+            </Link>
+            <Link
+              href="/nosotros"
+              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
+            >
+              Conocer HTK
+            </Link>
+          </div>
         </div>
       </section>
     </>
