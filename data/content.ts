@@ -2038,8 +2038,11 @@ export const navItems = [
   },
   {
     label: 'Soluciones',
-    href: '/soluciones/identificacion-inteligente',
-    dropdown: solutions.map(s => ({ label: s.title, href: `/soluciones/${s.slug}`, description: s.tagline })),
+    href: '/soluciones/plataforma',
+    dropdown: [
+      { label: 'Plataforma HTK', href: '/soluciones/plataforma', description: 'Cómo funciona el sistema completo', group: 'Plataforma' },
+      ...solutions.map(s => ({ label: s.title, href: `/soluciones/${s.slug}`, description: s.tagline, group: 'Capacidades' })),
+    ],
   },
   {
     label: 'Casos',
