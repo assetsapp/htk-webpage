@@ -50,49 +50,44 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
     ? (industry.solutionSlugs as string[]).map((s) => solutions.find((sol) => sol.slug === s)).filter(Boolean)
     : solutions.slice(0, 3);
 
-  const heroHeadline = hasRichContent && 'heroHeadline' in industry ? industry.heroHeadline as string : industry.title;
-  const heroSubheadline = hasRichContent && 'heroSubheadline' in industry ? industry.heroSubheadline as string : industry.description;
-  const ctaHeadline = hasRichContent && 'ctaHeadline' in industry ? industry.ctaHeadline as string : `¿Tu empresa está en ${industry.title}?`;
-  const ctaSubtext = hasRichContent && 'ctaSubtext' in industry ? industry.ctaSubtext as string : 'Agenda un diagnóstico sin costo para entender cuál es tu nivel de control actual y qué puedes mejorar.';
+  const ind = industry as Record<string, unknown>;
+  const heroHeadline = (ind.heroHeadline as string | undefined) ?? industry.title;
+  const heroSubheadline = (ind.heroSubheadline as string | undefined) ?? industry.description;
+  const ctaHeadline = (ind.ctaHeadline as string | undefined) ?? `¿Tu empresa está en ${industry.title}?`;
+  const ctaSubtext = (ind.ctaSubtext as string | undefined) ?? 'Agenda un diagnóstico sin costo para entender cuál es tu nivel de control actual y qué puedes mejorar.';
 
   return (
     <>
       {/* Hero */}
-      <section className="relative bg-surface-dark pt-28 pb-24 overflow-hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={industry.image}
-          alt={industry.title}
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-surface-dark/95 via-surface-dark/80 to-transparent" />
+      <section className="bg-surface-base pt-28 pb-20 border-b border-border-subtle">
+        <div className="max-w-8xl mx-auto px-6 md:px-10">
+          <div className="max-w-3xl">
+            <div className="flex items-center gap-2 mb-4">
+              <Link href="/" className="text-xs text-ink-300 hover:text-brand transition-colors">Inicio</Link>
+              <span className="text-ink-300 text-xs">/</span>
+              <span className="text-xs text-ink-300">Industrias</span>
+              <span className="text-ink-300 text-xs">/</span>
+              <span className="text-xs text-brand">{industry.title}</span>
+            </div>
 
-        <div className="relative max-w-8xl mx-auto px-6 md:px-10">
-          <div className="flex items-center gap-2 mb-5">
-            <Link href="/" className="text-xs text-white/40 hover:text-white/70 transition-colors">Inicio</Link>
-            <span className="text-white/30 text-xs">/</span>
-            <span className="text-xs text-white/40">Industrias</span>
-            <span className="text-white/30 text-xs">/</span>
-            <span className="text-xs text-brand">{industry.title}</span>
-          </div>
+            <p className="text-xs font-medium tracking-widest uppercase text-brand mb-5">Industria</p>
+            <h1 className="mb-5">{heroHeadline}</h1>
+            <p className="text-[17px] text-ink-500 leading-relaxed mb-8 max-w-2xl">{heroSubheadline}</p>
 
-          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Industria</p>
-          <h1 className="text-white max-w-2xl mb-5">{heroHeadline}</h1>
-          <p className="text-[17px] text-white/70 leading-relaxed mb-8 max-w-xl">{heroSubheadline}</p>
-
-          <div className="flex flex-wrap gap-3">
-            <Link
-              href="/diagnostico"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
-            >
-              Solicitar diagnóstico <ArrowRight />
-            </Link>
-            <Link
-              href="/demo-tagventory"
-              className="inline-flex items-center gap-2 px-6 py-3 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
-            >
-              Ver demo Tagventory
-            </Link>
+            <div className="flex flex-wrap gap-3">
+              <Link
+                href="/diagnostico"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
+              >
+                Solicitar diagnóstico <ArrowRight />
+              </Link>
+              <Link
+                href="/demo-tagventory"
+                className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
+              >
+                Ver demo Tagventory
+              </Link>
+            </div>
           </div>
         </div>
       </section>
