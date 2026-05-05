@@ -88,7 +88,7 @@ function Calculadora() {
           </div>
 
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="mt-8 w-full inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />
@@ -165,7 +165,7 @@ function Checklist() {
           </div>
           <p className="text-xs text-white/40 mb-6">{checked.size} de {total} cumplidos</p>
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="w-full inline-flex items-center justify-center gap-2 px-4 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Mejorar resultado <ArrowRight />

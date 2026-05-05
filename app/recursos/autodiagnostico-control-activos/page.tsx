@@ -343,7 +343,7 @@ export default function AutodiagnosticoPage() {
               Calcular impacto económico <ArrowRight />
             </Link>
             <Link
-              href="/diagnostico"
+              href="/sesion"
               className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
             >
               Solicitar diagnóstico

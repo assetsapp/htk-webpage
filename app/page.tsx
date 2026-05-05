@@ -83,7 +83,7 @@ function Hero() {
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/diagnostico"
+              href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn transition-all duration-200 hover:bg-brand-hover"
             >
               Solicitar diagnóstico
@@ -267,7 +267,7 @@ function Capabilities() {
 
             <div className="mt-4 pt-4 border-t border-border-subtle text-center">
               <Link
-                href="/demo-tagventory"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
                 Realizar autodiagnóstico <ArrowRight />
@@ -329,7 +329,7 @@ function PlatformMicro() {
 
         <div className="text-center">
           <Link
-            href="/demo-tagventory"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Ver cómo funciona la plataforma <ArrowRight />
@@ -538,7 +538,7 @@ function Resources() {
             ),
           },
           {
-            href: '/diagnostico',
+            href: '/recursos/autodiagnostico-control-activos',
             label: 'Autodiagnóstico',
             title: '¿Tienes control real de tus activos?',
             description: 'Responde unas preguntas rápidas y descubre qué tan expuesta está tu operación a pérdidas, errores y falta de control.',
@@ -608,7 +608,7 @@ function DarkCTA() {
 
         <div className="flex justify-center">
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />

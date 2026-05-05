@@ -98,7 +98,7 @@ export default function Footer() {
 
             <div className="mt-6 pt-4 border-t border-border-subtle">
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="block text-center px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn transition-colors hover:bg-brand-hover"
               >
                 Solicitar diagnóstico

@@ -68,7 +68,7 @@ export default function CasosExitoPage() {
             </p>
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
                 Solicitar diagnóstico <ArrowRight />
@@ -273,7 +273,7 @@ export default function CasosExitoPage() {
             Descubre cómo aplicar estos resultados en tu organización.
           </p>
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />

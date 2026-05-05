@@ -129,7 +129,7 @@ export default function Nav() {
         {/* CTA */}
         <div className="hidden lg:block">
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-5 py-2.5 bg-brand text-surface-dark text-sm font-medium rounded-btn transition-all duration-200 hover:bg-brand-hover"
           >
             Solicitar diagnóstico
@@ -192,7 +192,7 @@ export default function Nav() {
             ))}
             <div className="mt-3 pt-3 border-t border-border-subtle">
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="block text-center px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn transition-colors hover:bg-brand-hover"
               >
                 Solicitar diagnóstico

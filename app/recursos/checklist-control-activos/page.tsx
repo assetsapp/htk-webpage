@@ -275,7 +275,7 @@ export default function ChecklistPage() {
                   Calcular impacto económico <ArrowRight />
                 </Link>
                 <Link
-                  href="/diagnostico"
+                  href="/sesion"
                   className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
                 >
                   Solicitar diagnóstico
@@ -383,7 +383,7 @@ export default function ChecklistPage() {
                   <h3 className="text-base font-medium text-ink mb-2">¡Listo, {form.nombre.split(' ')[0]}!</h3>
                   <p className="text-sm text-ink-500 mb-6">Te enviamos el checklist a <span className="font-medium text-ink">{form.email}</span></p>
                   <Link
-                    href="/diagnostico"
+                    href="/sesion"
                     className="inline-flex items-center gap-2 px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
                   >
                     Solicitar diagnóstico <ArrowRight />
@@ -408,7 +408,7 @@ export default function ChecklistPage() {
               Calcular impacto económico <ArrowRight />
             </Link>
             <Link
-              href="/diagnostico"
+              href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
             >
               Solicitar diagnóstico

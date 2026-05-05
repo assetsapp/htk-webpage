@@ -390,7 +390,7 @@ export default function SesionPage() {
                   </p>
                   <p className="text-sm text-ink-300 mb-8">Te contactamos a <span className="font-medium text-ink">{form.email}</span> en menos de 24 horas.</p>
                   <div className="flex flex-col gap-3">
-                    <Link href="/diagnostico"
+                    <Link href="/sesion"
                       className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
                       Ver qué es el diagnóstico <ArrowRight />
                     </Link>
@@ -420,7 +420,7 @@ export default function SesionPage() {
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
               Agendar sesión <ArrowRight />
             </a>
-            <Link href="/diagnostico"
+            <Link href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors">
               Ver diagnóstico
             </Link>

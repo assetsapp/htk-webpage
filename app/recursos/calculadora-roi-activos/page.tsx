@@ -242,7 +242,7 @@ function CalculadoraInner() {
 
               {/* CTA */}
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="w-full inline-flex items-center justify-center gap-2 px-6 py-4 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
                 Solicitar diagnóstico <ArrowRight />
@@ -313,7 +313,7 @@ function CalculadoraInner() {
             Un diagnóstico confirma si estas estimaciones aplican a tu operación y define el plan concreto para recuperarlas.
           </p>
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />

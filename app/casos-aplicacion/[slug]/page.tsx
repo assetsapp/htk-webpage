@@ -68,13 +68,13 @@ export default async function CaseApplicationPage({ params }: { params: Promise<
 
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
                 Solicitar diagnóstico <ArrowRight />
               </Link>
               <Link
-                href="/demo-tagventory"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
               >
                 Ver demo Tagventory
@@ -301,7 +301,7 @@ export default async function CaseApplicationPage({ params }: { params: Promise<
             {hasRichContent && ca.ctaSubtext ? ca.ctaSubtext as string : 'Un diagnóstico nos permite confirmar si este caso aplica a tu operación y qué tan compleja sería la implementación.'}
           </p>
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />
