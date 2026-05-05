@@ -2366,7 +2366,7 @@ export const navItems = [
       { label: 'Casos de éxito', href: '/casos-exito', description: 'Resultados reales en operación', group: 'Casos de éxito' },
     ],
   },
-  { label: 'Recursos', href: '/recursos/calculadora-perdidas-activos' },
+  { label: 'Recursos', href: '/recursos/calculadora-roi-activos' },
   { label: 'Nosotros', href: '/nosotros' },
   { label: 'Contacto', href: '/contacto' },
 ];
