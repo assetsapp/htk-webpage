@@ -21,7 +21,7 @@ export default function Nosotros() {
             <p className="text-[17px] text-ink-500 leading-relaxed mb-8">
               HTK es una empresa mexicana con más de 10 años ayudando a organizaciones medianas y grandes a recuperar el control de sus activos mediante tecnología, procesos y la plataforma Tagventory.
             </p>
-            <Link href="/diagnostico" className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
+            <Link href="/sesion" className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
               Hablar con HTK <ArrowRight />
             </Link>
           </div>
@@ -94,7 +94,7 @@ export default function Nosotros() {
                 </div>
               ))}
             </div>
-            <Link href="/demo-tagventory" className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
+            <Link href="/sesion" className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
               Ver demo de Tagventory <ArrowRight />
             </Link>
           </div>
@@ -162,10 +162,10 @@ export default function Nosotros() {
           <h2 className="text-white mb-4">¿Quieres conocer si podemos ayudarte?</h2>
           <p className="text-[17px] text-white/60 max-w-xl mx-auto mb-8">Empieza con un diagnóstico sin costo. En 45 minutos sabrás si HTK es la solución correcta para tu operación.</p>
           <div className="flex flex-wrap gap-4 justify-center">
-            <Link href="/diagnostico" className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
+            <Link href="/sesion" className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors">
               Solicitar diagnóstico <ArrowRight />
             </Link>
-            <Link href="/contacto" className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors">
+            <Link href="/sesion" className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors">
               Contactar directamente
             </Link>
           </div>

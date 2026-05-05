@@ -64,13 +64,13 @@ export default async function ICPPage({ params }: { params: Promise<{ slug: stri
 
             <div className="flex flex-wrap gap-3">
               <Link
-                href="/diagnostico"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
                 Solicitar diagnóstico <ArrowRight />
               </Link>
               <Link
-                href="/demo-tagventory"
+                href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
               >
                 Ver demo Tagventory
@@ -460,7 +460,7 @@ export default async function ICPPage({ params }: { params: Promise<{ slug: stri
           </p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
-              href="/diagnostico"
+              href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
             >
               Solicitar diagnóstico gratuito <ArrowRight />

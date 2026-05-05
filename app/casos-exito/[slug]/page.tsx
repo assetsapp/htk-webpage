@@ -89,7 +89,7 @@ export default async function CaseSuccessPage({ params }: { params: Promise<{ sl
 
               <div className="flex flex-wrap gap-3">
                 <Link
-                  href="/diagnostico"
+                  href="/sesion"
                   className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
                 >
                   Solicitar diagnóstico <ArrowRight />
@@ -331,7 +331,7 @@ export default async function CaseSuccessPage({ params }: { params: Promise<{ sl
             {hasRichContent && c.ctaSubtext ? c.ctaSubtext as string : 'Empieza con un diagnóstico. Identifica el problema, dimensiona la solución y conoce el impacto esperado.'}
           </p>
           <Link
-            href="/diagnostico"
+            href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
             Solicitar diagnóstico <ArrowRight />
