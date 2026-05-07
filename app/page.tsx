@@ -525,7 +525,7 @@ function Resources() {
       <div className="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
         {[
           {
-            href: '/recursos/calculadora-perdidas-activos',
+            href: '/recursos/calculadora-roi-activos',
             label: 'Calculadora',
             title: 'Calculadora de pérdidas por activos',
             description: 'Estima cuánto dinero pierde tu empresa por activos no controlados, duplicados o sin trazabilidad.',
@@ -552,7 +552,7 @@ function Resources() {
             ),
           },
           {
-            href: '/recursos/checklist-cumplimiento-activos',
+            href: '/recursos/checklist-control-activos',
             label: 'Checklist',
             title: 'Checklist de cumplimiento de activos',
             description: 'Verifica si tu empresa cumple con los requisitos mínimos de control, registro y trazabilidad de activos fijos.',

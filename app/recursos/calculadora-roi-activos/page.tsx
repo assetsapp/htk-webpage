@@ -304,6 +304,35 @@ function CalculadoraInner() {
         </div>
       </section>
 
+      {/* Otros recursos */}
+      <section className="bg-surface-base border-t border-border-subtle py-12">
+        <div className="max-w-8xl mx-auto px-6 md:px-10">
+          <p className="text-xs font-medium tracking-widest uppercase text-brand mb-6 text-center">Otros recursos</p>
+          <div className="grid sm:grid-cols-2 gap-4 max-w-xl mx-auto">
+            <Link
+              href="/recursos/autodiagnostico-control-activos"
+              className="group flex items-center justify-between p-4 bg-surface-alt border border-border-subtle rounded-card hover:border-brand/40 hover:shadow-sm transition-all"
+            >
+              <div>
+                <p className="text-sm font-medium text-ink mb-0.5">Autodiagnóstico</p>
+                <p className="text-xs text-ink-300">Descubre tu nivel de control</p>
+              </div>
+              <ArrowRight />
+            </Link>
+            <Link
+              href="/recursos/checklist-control-activos"
+              className="group flex items-center justify-between p-4 bg-surface-alt border border-border-subtle rounded-card hover:border-brand/40 hover:shadow-sm transition-all"
+            >
+              <div>
+                <p className="text-sm font-medium text-ink mb-0.5">Checklist</p>
+                <p className="text-xs text-ink-300">30 puntos de control a revisar</p>
+              </div>
+              <ArrowRight />
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* CTA final */}
       <section className="bg-surface-dark py-24">
         <div className="max-w-8xl mx-auto px-6 md:px-10 text-center">

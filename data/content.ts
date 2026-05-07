@@ -3088,7 +3088,14 @@ export const navItems = [
       { label: 'Casos de éxito', href: '/casos-exito', description: 'Resultados reales en operación', group: 'Casos de éxito' },
     ],
   },
-  { label: 'Recursos', href: '/recursos/calculadora-roi-activos' },
+  {
+    label: 'Recursos',
+    href: '/recursos/autodiagnostico-control-activos',
+    dropdown: [
+      { label: 'Autodiagnóstico', href: '/recursos/autodiagnostico-control-activos', description: 'Descubre tu nivel de control en 60 segundos' },
+      { label: 'Calculadora ROI', href: '/recursos/calculadora-roi-activos', description: 'Estima el impacto económico de tus activos' },
+      { label: 'Checklist de control', href: '/recursos/checklist-control-activos', description: '30 puntos clave para auditar tu operación' },
+    ],
+  },
   { label: 'Nosotros', href: '/nosotros' },
-  { label: 'Agendar sesión', href: '/sesion' },
 ];

@@ -73,12 +73,6 @@ export default async function CaseApplicationPage({ params }: { params: Promise<
               >
                 Solicitar diagnóstico <ArrowRight />
               </Link>
-              <Link
-                href="/sesion"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
-              >
-                Ver demo Tagventory
-              </Link>
             </div>
           </div>
         </div>

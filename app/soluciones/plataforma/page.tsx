@@ -305,12 +305,6 @@ export default function PlataformaPage() {
             >
               Solicitar diagnóstico <ArrowRight />
             </Link>
-            <Link
-              href="/sesion"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
-            >
-              Agendar demo Tagventory
-            </Link>
           </div>
         </div>
       </section>
