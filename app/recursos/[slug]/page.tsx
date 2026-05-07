@@ -179,7 +179,7 @@ function Checklist() {
 export default function Recursos() {
   const params = useParams<{ slug: string }>();
   const slug = params?.slug;
-  const isCalc = slug === 'calculadora-perdidas-activos';
+  const isCalc = slug === 'calculadora-roi-activos';
 
   return (
     <>
@@ -193,13 +193,13 @@ export default function Recursos() {
 
           <div className="flex gap-3 mb-8">
             <Link
-              href="/recursos/calculadora-perdidas-activos"
+              href="/recursos/calculadora-roi-activos"
               className={`px-4 py-2 text-sm font-medium rounded-btn transition-colors ${isCalc ? 'bg-brand text-surface-dark' : 'bg-surface-raised border border-border-subtle text-ink-500 hover:text-ink'}`}
             >
               Calculadora de pérdidas
             </Link>
             <Link
-              href="/recursos/checklist-cumplimiento-activos"
+              href="/recursos/checklist-control-activos"
               className={`px-4 py-2 text-sm font-medium rounded-btn transition-colors ${!isCalc ? 'bg-brand text-surface-dark' : 'bg-surface-raised border border-border-subtle text-ink-500 hover:text-ink'}`}
             >
               Checklist de cumplimiento

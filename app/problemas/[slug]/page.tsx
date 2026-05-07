@@ -435,13 +435,13 @@ export default async function ICPPage({ params }: { params: Promise<{ slug: stri
 
           <div className="flex flex-wrap gap-3">
             <Link
-              href="/recursos/calculadora-perdidas-activos"
+              href="/recursos/calculadora-roi-activos"
               className="inline-flex items-center gap-2 px-5 py-3 border border-border-subtle bg-surface-raised rounded-btn text-sm text-ink-700 hover:border-brand/40 hover:text-brand transition-colors"
             >
               Calculadora de pérdidas por falta de control <ArrowRight size={12} />
             </Link>
             <Link
-              href="/recursos/checklist-cumplimiento-activos"
+              href="/recursos/checklist-control-activos"
               className="inline-flex items-center gap-2 px-5 py-3 border border-border-subtle bg-surface-raised rounded-btn text-sm text-ink-700 hover:border-brand/40 hover:text-brand transition-colors"
             >
               Checklist de control de activos <ArrowRight size={12} />

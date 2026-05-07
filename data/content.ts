@@ -3090,5 +3090,4 @@ export const navItems = [
   },
   { label: 'Recursos', href: '/recursos/calculadora-roi-activos' },
   { label: 'Nosotros', href: '/nosotros' },
-  { label: 'Agendar sesión', href: '/sesion' },
 ];
