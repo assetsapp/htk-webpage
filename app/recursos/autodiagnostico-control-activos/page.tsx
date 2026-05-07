@@ -226,6 +226,17 @@ export default function AutodiagnosticoPage() {
           >
             Iniciar autodiagnóstico <ArrowRight />
           </button>
+
+          <div className="mt-10 pt-8 border-t border-border-subtle flex flex-col sm:flex-row gap-3 justify-center text-sm text-ink-300">
+            <span className="hidden sm:inline">Otros recursos:</span>
+            <Link href="/recursos/calculadora-roi-activos" className="hover:text-brand transition-colors flex items-center gap-1">
+              Calculadora ROI <ArrowRight size={12} />
+            </Link>
+            <span className="hidden sm:inline text-border-subtle">·</span>
+            <Link href="/recursos/checklist-control-activos" className="hover:text-brand transition-colors flex items-center gap-1">
+              Checklist de control <ArrowRight size={12} />
+            </Link>
+          </div>
         </div>
       )}
 
@@ -335,7 +346,7 @@ export default function AutodiagnosticoPage() {
           </div>
 
           {/* CTAs */}
-          <div className="flex flex-col sm:flex-row gap-3 mb-6">
+          <div className="flex flex-col sm:flex-row gap-3 mb-4">
             <Link
               href={`/recursos/calculadora-roi-activos?nivel=${level}`}
               className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
@@ -349,6 +360,12 @@ export default function AutodiagnosticoPage() {
               Solicitar diagnóstico
             </Link>
           </div>
+          <Link
+            href="/recursos/checklist-control-activos"
+            className="w-full inline-flex items-center justify-center gap-1.5 text-sm text-ink-300 hover:text-brand transition-colors py-1 mb-4"
+          >
+            Ver checklist de control de activos <ArrowRight size={12} />
+          </Link>
 
           <button
             onClick={handleRestart}

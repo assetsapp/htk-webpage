@@ -67,12 +67,6 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
               >
                 Solicitar diagnóstico <ArrowRight />
               </Link>
-              <Link
-                href="/sesion"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
-              >
-                Ver demo Tagventory
-              </Link>
             </div>
           </div>
         </div>
@@ -284,12 +278,6 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
             >
               Solicitar diagnóstico <ArrowRight />
-            </Link>
-            <Link
-              href="/sesion"
-              className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
-            >
-              Agendar demo Tagventory
             </Link>
           </div>
         </div>
