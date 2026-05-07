@@ -63,18 +63,18 @@ export default function Footer() {
           <div>
             <h4 className="text-xs font-medium tracking-widest uppercase text-ink-300 mb-4">Contacto</h4>
             <div className="flex flex-col gap-3">
-              <a href="mailto:contacto@htk-id.com" className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
+              <a href="mailto:ventas@htk-id.com" className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <rect x="2" y="3" width="12" height="10" rx="1.5" />
                   <path d="M2 5l6 4.5L14 5" strokeLinecap="round" />
                 </svg>
-                contacto@htk-id.com
+                ventas@htk-id.com
               </a>
-              <a href="tel:+525512345678" className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
+              <a href="tel:+525517610313" className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M3 3c.5-.5 1.5-.5 2 0l1.5 2c.3.5.2 1-.2 1.4L5.5 7.2c.7 1.4 1.9 2.6 3.3 3.3l.8-.8c.4-.4.9-.5 1.4-.2L13 11c.5.5.5 1.5 0 2l-.8.8c-1 1-4.2.5-7.3-2.7C1.8 7.8 1.3 4.5 3 3z" />
                 </svg>
-                +52 (55) 1234-5678
+                +52 55 1761 0313
               </a>
               <div className="text-sm text-ink-500 flex items-start gap-2">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" className="mt-0.5 flex-shrink-0">
