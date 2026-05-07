@@ -38,22 +38,36 @@ const motivoOptions = [
   'Otro',
 ];
 
-type FormState = 'idle' | 'sent';
+type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
 export default function SesionPage() {
-  const [form, setForm] = useState({ nombre: '', empresa: '', email: '', telefono: '', motivo: '' });
+  const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', comentarios: '' });
   const [formState, setFormState] = useState<FormState>('idle');
 
   function set(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setFormState('sent');
+    setFormState('loading');
+    try {
+      const res = await fetch('/api/leads', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      if (res.ok) {
+        setFormState('sent');
+      } else {
+        setFormState('error');
+      }
+    } catch {
+      setFormState('error');
+    }
   }
 
-  const isValid = form.nombre && form.empresa && form.email && form.motivo;
+  const isValid = form.nombre && form.apellido && form.empresa && form.email && form.motivo;
 
   return (
     <div className="min-h-screen bg-surface-base">
@@ -123,14 +137,23 @@ export default function SesionPage() {
                         />
                       </div>
                       <div>
-                        <label className="block text-xs font-medium text-ink-500 mb-1">Empresa *</label>
+                        <label className="block text-xs font-medium text-ink-500 mb-1">Apellido *</label>
                         <input
-                          required type="text" value={form.empresa}
-                          onChange={(e) => set('empresa', e.target.value)}
-                          placeholder="Tu empresa"
+                          required type="text" value={form.apellido}
+                          onChange={(e) => set('apellido', e.target.value)}
+                          placeholder="Tu apellido"
                           className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
                         />
                       </div>
+                    </div>
+                    <div>
+                      <label className="block text-xs font-medium text-ink-500 mb-1">Empresa *</label>
+                      <input
+                        required type="text" value={form.empresa}
+                        onChange={(e) => set('empresa', e.target.value)}
+                        placeholder="Tu empresa"
+                        className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                      />
                     </div>
 
                     <div>
@@ -154,32 +177,44 @@ export default function SesionPage() {
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-ink-500 mb-2">¿Qué quieres resolver? *</label>
-                      <div className="grid grid-cols-2 gap-2">
+                      <label className="block text-xs font-medium text-ink-500 mb-1">¿Qué quieres resolver? *</label>
+                      <select
+                        required value={form.motivo}
+                        onChange={(e) => set('motivo', e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors appearance-none"
+                      >
+                        <option value="" disabled>Selecciona una opción</option>
                         {motivoOptions.map((opt) => (
-                          <button
-                            key={opt} type="button"
-                            onClick={() => set('motivo', opt)}
-                            className={`text-left px-3 py-2.5 rounded-card border text-xs transition-all leading-snug ${
-                              form.motivo === opt
-                                ? 'border-brand bg-brand-tint50 text-ink font-medium'
-                                : 'border-border-subtle bg-surface-alt text-ink-500 hover:border-brand/40'
-                            }`}
-                          >
-                            {opt}
-                          </button>
+                          <option key={opt} value={opt}>{opt}</option>
                         ))}
-                      </div>
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-ink-500 mb-1">Comentarios adicionales</label>
+                      <textarea
+                        value={form.comentarios}
+                        onChange={(e) => set('comentarios', e.target.value)}
+                        placeholder="Cuéntanos más sobre tu operación o lo que necesitas..."
+                        rows={3}
+                        className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors resize-none"
+                      />
                     </div>
 
                     <button
-                      type="submit" disabled={!isValid}
+                      type="submit" disabled={!isValid || formState === 'loading'}
                       className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-medium rounded-btn transition-all ${
-                        isValid ? 'bg-brand text-surface-dark hover:bg-brand-hover' : 'bg-surface-alt text-ink-300 cursor-not-allowed'
+                        isValid && formState !== 'loading' ? 'bg-brand text-surface-dark hover:bg-brand-hover' : 'bg-surface-alt text-ink-300 cursor-not-allowed'
                       }`}
                     >
-                      Solicitar sesión <ArrowRight />
+                      {formState === 'loading' ? 'Enviando...' : <> Solicitar sesión <ArrowRight /> </>}
                     </button>
+
+                    {formState === 'error' && (
+                      <p className="text-xs text-red-500 text-center">
+                        Hubo un problema al enviar. Intenta de nuevo o escríbenos a ventas@htk-id.com
+                      </p>
+                    )}
 
                     <p className="text-xs text-ink-300 text-center">
                       Sin compromiso · 30 minutos · 100% enfocado en tu operación
