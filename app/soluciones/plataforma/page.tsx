@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+import { buildMeta } from '@/lib/seo';
+
+export const metadata: Metadata = buildMeta(
+  'Plataforma HTK — Sistema integral de control de activos',
+  'La plataforma HTK integra identificación, trazabilidad, visibilidad, integración y automatización para convertir tu operación física en un sistema controlado y confiable.',
+  '/soluciones/plataforma'
+);
+
 import Link from 'next/link';
 import { solutions, caseApplications } from '@/data/content';
 
