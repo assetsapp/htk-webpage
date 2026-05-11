@@ -1,3 +1,12 @@
+import type { Metadata } from 'next';
+import { buildMeta } from '@/lib/seo';
+
+export const metadata: Metadata = buildMeta(
+  'Quiénes somos — El equipo detrás de HTK',
+  'HTK es una empresa especializada en identificación, trazabilidad y control de activos físicos. Conoce nuestra metodología, equipo y casos de impacto real.',
+  '/nosotros'
+);
+
 import Link from 'next/link';
 import IcosahedronSVG from '@/components/IcosahedronSVG';
 import { clients } from '@/data/content';

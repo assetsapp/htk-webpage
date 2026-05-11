@@ -1,3 +1,6 @@
+'use client';
+import { pushEvent } from '@/lib/gtm';
+
 export default function WhatsAppButton() {
   const phone = '525517610313';
   const message = encodeURIComponent('Hola, me interesa conocer más sobre HTK y cómo puede ayudar a mi operación.');
@@ -9,6 +12,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
+      onClick={() => pushEvent({ event: 'click_whatsapp' })}
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
       style={{ backgroundColor: '#25D366' }}
     >

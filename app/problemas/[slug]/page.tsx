@@ -1,6 +1,19 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { icps, industries, solutions, caseApplications, caseSuccesses } from '@/data/content';
+import { buildMeta } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const icp = icps.find((i) => i.slug === slug);
+  if (!icp) return {};
+  return buildMeta(
+    `${icp.title} de activos — cómo resolverlo`,
+    `${icp.description} Descubre cómo HTK ayuda a resolver este problema con tecnología de identificación y trazabilidad de activos.`,
+    `/problemas/${slug}`
+  );
+}
 
 function ArrowRight({ size = 14 }: { size?: number }) {
   return (

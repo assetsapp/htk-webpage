@@ -1,3 +1,13 @@
+import type { Metadata } from 'next';
+import { buildMeta } from '@/lib/seo';
+
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const ca = (await import('@/data/content')).caseApplications.find((c) => c.slug === slug);
+  if (!ca) return {};
+  return buildMeta(`${ca.title}`, `${ca.description} Descubre cómo HTK implementó esta solución.`, `/casos-aplicacion/${slug}`);
+}
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { caseApplications, icps, industries, solutions } from '@/data/content';
