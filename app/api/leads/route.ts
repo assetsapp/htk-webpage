@@ -22,23 +22,29 @@ async function getAccessToken(): Promise<string> {
 
 export async function POST(req: NextRequest) {
   try {
-    const { nombre, apellido, empresa, email, telefono, motivo, comentarios } = await req.json();
+    const { nombre, apellido, empresa, email, telefono, motivo, comentarios, fuente } = await req.json();
 
-    if (!nombre || !apellido || !empresa || !email || !motivo) {
+    // Formularios de recursos solo requieren nombre, empresa y email
+    const isRecurso = !!fuente && !motivo;
+    if (!nombre || !empresa || !email || (!isRecurso && !motivo)) {
       return NextResponse.json({ error: 'Campos requeridos faltantes' }, { status: 400 });
     }
 
     const accessToken = await getAccessToken();
 
     const descripcion = [
-      `Empresa: ${empresa}`,
-      `Motivo: ${motivo}`,
+      fuente ? `Fuente: ${fuente}` : null,
+      empresa ? `Empresa: ${empresa}` : null,
+      motivo ? `Motivo: ${motivo}` : null,
       comentarios ? `Comentarios: ${comentarios}` : null,
     ].filter(Boolean).join('\n\n');
 
+    const [firstName, ...rest] = nombre.trim().split(' ');
+    const lastName = apellido ? apellido.trim() : (rest.join(' ') || '-');
+
     const contact = {
-      First_Name: nombre.trim(),
-      Last_Name: apellido.trim(),
+      First_Name: firstName,
+      Last_Name: lastName,
       Email: email,
       Phone: telefono || '',
       Description: descripcion,

@@ -120,7 +120,7 @@ export default function SesionPage() {
 
             {/* Right — formulario */}
             <div className="bg-surface-raised border border-border-subtle rounded-block p-7 shadow-sm">
-              {formState === 'idle' ? (
+              {formState !== 'sent' ? (
                 <>
                   <h2 className="text-lg font-medium text-ink mb-1">Agenda tu sesión</h2>
                   <p className="text-sm text-ink-300 mb-6">Te confirmamos disponibilidad en menos de 24 horas.</p>

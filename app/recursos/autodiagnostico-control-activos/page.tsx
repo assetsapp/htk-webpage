@@ -159,12 +159,15 @@ function getLevel(score: number): Level {
 }
 
 type Screen = 'intro' | 'question' | 'result';
+type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
 export default function AutodiagnosticoPage() {
   const [screen, setScreen] = useState<Screen>('intro');
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [selected, setSelected] = useState<number | null>(null);
+  const [formState, setFormState] = useState<FormState>('idle');
+  const [form, setForm] = useState({ nombre: '', empresa: '', email: '' });
 
   const totalScore = answers.reduce((a, b) => a + b, 0);
   const level = getLevel(totalScore);
@@ -193,6 +196,41 @@ export default function AutodiagnosticoPage() {
     setCurrent(0);
     setAnswers([]);
     setSelected(null);
+    setFormState('idle');
+    setForm({ nombre: '', empresa: '', email: '' });
+  }
+
+  async function handleFormSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    setFormState('loading');
+    try {
+      const res = await fetch('/api/pdf/autodiagnostico', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: form.nombre,
+          empresa: form.empresa,
+          email: form.email,
+          answers,
+          totalScore,
+          level,
+        }),
+      });
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'HTK-Autodiagnostico-Control-Activos.pdf';
+        a.click();
+        URL.revokeObjectURL(url);
+        setFormState('sent');
+      } else {
+        setFormState('error');
+      }
+    } catch {
+      setFormState('error');
+    }
   }
 
   const q = questions[current];
@@ -343,6 +381,50 @@ export default function AutodiagnosticoPage() {
           <div className="p-4 bg-surface-alt border border-border-subtle rounded-card mb-8 flex items-center justify-between">
             <span className="text-sm text-ink-500">Puntuación total</span>
             <span className="text-sm font-semibold text-ink">{totalScore} / 24 puntos</span>
+          </div>
+
+          {/* Formulario descargable */}
+          <div className="p-6 bg-surface-raised border border-border-subtle rounded-block mb-6">
+            {formState !== 'sent' ? (
+              <form onSubmit={handleFormSubmit} className="space-y-3">
+                <h3 className="text-sm font-medium text-ink mb-1">Descarga tu resultado en PDF</h3>
+                <p className="text-xs text-ink-300 mb-3">Recibe un resumen de tu diagnóstico con recomendaciones.</p>
+                <input
+                  required type="text" placeholder="Tu nombre"
+                  value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                />
+                <input
+                  required type="text" placeholder="Tu empresa"
+                  value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                />
+                <input
+                  required type="email" placeholder="tu@empresa.com"
+                  value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                />
+                <button
+                  type="submit" disabled={formState === 'loading'}
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                >
+                  {formState === 'loading' ? 'Enviando...' : <> Descargar resultado PDF <ArrowRight /> </>}
+                </button>
+                {formState === 'error' && (
+                  <p className="text-xs text-red-500 text-center">Hubo un problema. Intenta de nuevo.</p>
+                )}
+              </form>
+            ) : (
+              <div className="text-center py-4">
+                <div className="w-12 h-12 bg-brand-tint50 border border-brand-tint100 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="#F79A3F" strokeWidth="2">
+                    <path d="M4 11l4.5 4.5L18 6" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </div>
+                <p className="text-sm font-medium text-ink mb-1">¡Listo, {form.nombre.split(' ')[0]}!</p>
+                <p className="text-xs text-ink-300">Tu PDF con los resultados y recomendaciones se descargó automáticamente.</p>
+              </div>
+            )}
           </div>
 
           {/* CTAs */}
