@@ -100,7 +100,7 @@ const blocks = [
 
 const totalItems = blocks.reduce((acc, b) => acc + b.items.length, 0);
 
-type FormState = 'idle' | 'sent';
+type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
 export default function ChecklistPage() {
   const [checked, setChecked] = useState<Set<string>>(new Set());
@@ -125,9 +125,35 @@ export default function ChecklistPage() {
     });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    setFormState('sent');
+    setFormState('loading');
+    try {
+      const res = await fetch('/api/pdf/checklist', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          nombre: form.nombre,
+          empresa: form.empresa,
+          email: form.email,
+          checkedKeys: Array.from(checked),
+        }),
+      });
+      if (res.ok) {
+        const blob = await res.blob();
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'HTK-Checklist-Control-Activos.pdf';
+        a.click();
+        URL.revokeObjectURL(url);
+        setFormState('sent');
+      } else {
+        setFormState('error');
+      }
+    } catch {
+      setFormState('error');
+    }
   }
 
   return (
@@ -265,12 +291,58 @@ export default function ChecklistPage() {
               </div>
             </div>
 
+            {/* Formulario descarga */}
+            <div className="p-5 bg-surface-raised border border-border-subtle rounded-block">
+              {formState !== 'sent' ? (
+                <form onSubmit={handleSubmit} className="space-y-3">
+                  <div>
+                    <p className="text-xs font-medium text-ink uppercase tracking-wider mb-0.5">Descargar PDF</p>
+                    <p className="text-xs text-ink-300">Con tus resultados y recomendaciones</p>
+                  </div>
+                  <input
+                    required type="text" placeholder="Tu nombre"
+                    value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })}
+                    className="w-full px-3 py-2 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                  />
+                  <input
+                    required type="text" placeholder="Tu empresa"
+                    value={form.empresa} onChange={(e) => setForm({ ...form, empresa: e.target.value })}
+                    className="w-full px-3 py-2 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                  />
+                  <input
+                    required type="email" placeholder="tu@empresa.com"
+                    value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className="w-full px-3 py-2 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                  />
+                  <button
+                    type="submit" disabled={formState === 'loading'}
+                    className="w-full inline-flex items-center justify-center gap-2 px-4 py-2.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+                  >
+                    {formState === 'loading' ? 'Generando...' : <> Descargar PDF <ArrowRight /></>}
+                  </button>
+                  {formState === 'error' && (
+                    <p className="text-xs text-red-500 text-center">Hubo un problema. Intenta de nuevo.</p>
+                  )}
+                </form>
+              ) : (
+                <div className="text-center py-3">
+                  <div className="w-10 h-10 bg-brand-tint50 border border-brand-tint100 rounded-full flex items-center justify-center mx-auto mb-3">
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="#F79A3F" strokeWidth="2">
+                      <path d="M3 9l4 4 8-8" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <p className="text-sm font-medium text-ink mb-1">¡Listo, {form.nombre.split(' ')[0]}!</p>
+                  <p className="text-xs text-ink-300">Tu PDF se descargó automáticamente.</p>
+                </div>
+              )}
+            </div>
+
             {/* CTAs */}
             {score > 0 && (
               <div className="space-y-2">
                 <Link
                   href={`/recursos/calculadora-roi-activos?nivel=${level}`}
-                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
+                  className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-surface-alt border border-border-subtle text-ink-700 text-sm font-medium rounded-btn hover:border-brand hover:text-brand transition-colors"
                 >
                   Calcular impacto económico <ArrowRight />
                 </Link>
@@ -304,92 +376,6 @@ export default function ChecklistPage() {
                   <span className="text-sm text-ink-500">{item}</span>
                 </div>
               ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Descargable */}
-      <section className="bg-surface-base py-16">
-        <div className="max-w-8xl mx-auto px-6 md:px-10">
-          <div className="grid md:grid-cols-2 gap-12 items-start">
-            <div>
-              <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Versión descargable</p>
-              <h2 className="mb-4">Descarga el checklist completo</h2>
-              <p className="text-[17px] text-ink-500 leading-relaxed mb-6">
-                Lleva el checklist a tu equipo en formato PDF. Incluye todos los bloques, explicación de resultados y recomendaciones.
-              </p>
-              <ul className="space-y-2">
-                {['Checklist completo imprimible', 'Explicación de cada bloque', 'Interpretación de resultados', 'Recomendaciones por nivel de control'].map((item, i) => (
-                  <li key={i} className="flex items-center gap-2 text-sm text-ink-500">
-                    <span className="text-brand">✓</span> {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="p-8 bg-surface-raised border border-border-subtle rounded-block">
-              {formState === 'idle' ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <h3 className="text-base font-medium text-ink mb-2">Recibe el PDF en tu correo</h3>
-                  <div>
-                    <label className="block text-xs font-medium text-ink-500 mb-1">Nombre</label>
-                    <input
-                      required
-                      type="text"
-                      value={form.nombre}
-                      onChange={(e) => setForm({ ...form, nombre: e.target.value })}
-                      placeholder="Tu nombre"
-                      className="w-full px-4 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-ink-500 mb-1">Empresa</label>
-                    <input
-                      required
-                      type="text"
-                      value={form.empresa}
-                      onChange={(e) => setForm({ ...form, empresa: e.target.value })}
-                      placeholder="Nombre de tu empresa"
-                      className="w-full px-4 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-medium text-ink-500 mb-1">Correo electrónico</label>
-                    <input
-                      required
-                      type="email"
-                      value={form.email}
-                      onChange={(e) => setForm({ ...form, email: e.target.value })}
-                      placeholder="tu@empresa.com"
-                      className="w-full px-4 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
-                  >
-                    Descargar checklist PDF <ArrowRight />
-                  </button>
-                  <p className="text-xs text-ink-300 text-center">Sin spam. Solo el recurso que pediste.</p>
-                </form>
-              ) : (
-                <div className="text-center py-8">
-                  <div className="w-14 h-14 bg-brand-tint50 border border-brand-tint100 rounded-full flex items-center justify-center mx-auto mb-5">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#F79A3F" strokeWidth="2">
-                      <path d="M5 12l4 4L19 7" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </div>
-                  <h3 className="text-base font-medium text-ink mb-2">¡Listo, {form.nombre.split(' ')[0]}!</h3>
-                  <p className="text-sm text-ink-500 mb-6">Te enviamos el checklist a <span className="font-medium text-ink">{form.email}</span></p>
-                  <Link
-                    href="/sesion"
-                    className="inline-flex items-center gap-2 px-5 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
-                  >
-                    Solicitar diagnóstico <ArrowRight />
-                  </Link>
-                </div>
-              )}
             </div>
           </div>
         </div>
