@@ -11,7 +11,8 @@ import { GTM_ID } from '@/lib/gtm';
 const inter = Inter({
   subsets: ['latin'],
   display: 'swap',
-  adjustFontFallback: true,   // genera @font-face fallback con métricas ajustadas → no cambia layout al hacer swap
+  variable: '--font-inter',      // expone la fuente como CSS variable
+  adjustFontFallback: true,      // fallback con métricas ajustadas → evita relayout en swap
   preload: true,
 });
 
@@ -58,7 +59,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema()) }}
         />
       </head>
-      <body className={`${inter.className} min-h-screen bg-surface-base flex flex-col`} suppressHydrationWarning>
+      <body className={`${inter.variable} ${inter.className} min-h-screen bg-surface-base flex flex-col`} suppressHydrationWarning>
         {/* GTM noscript fallback */}
         <noscript>
           <iframe
