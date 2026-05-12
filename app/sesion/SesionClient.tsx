@@ -40,11 +40,18 @@ const motivoOptions = [
   'Otro',
 ];
 
+const activosOptions = [
+  'Menos de 1,000',
+  '1,000 – 10,000',
+  '10,000 – 50,000',
+  'Más de 50,000',
+];
+
 type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
 export default function SesionPage() {
   const router = useRouter();
-  const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', comentarios: '' });
+  const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', activos: '', comentarios: '' });
   const [formState, setFormState] = useState<FormState>('idle');
 
   function set(field: string, value: string) {
@@ -189,6 +196,20 @@ export default function SesionPage() {
                       >
                         <option value="" disabled>Selecciona una opción</option>
                         {motivoOptions.map((opt) => (
+                          <option key={opt} value={opt}>{opt}</option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-medium text-ink-500 mb-1">N° de activos aproximado</label>
+                      <select
+                        value={form.activos}
+                        onChange={(e) => set('activos', e.target.value)}
+                        className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors appearance-none"
+                      >
+                        <option value="">Selecciona un rango (opcional)</option>
+                        {activosOptions.map((opt) => (
                           <option key={opt} value={opt}>{opt}</option>
                         ))}
                       </select>

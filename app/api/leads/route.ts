@@ -22,7 +22,7 @@ async function getAccessToken(): Promise<string> {
 
 export async function POST(req: NextRequest) {
   try {
-    const { nombre, apellido, empresa, email, telefono, motivo, comentarios, fuente } = await req.json();
+    const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente } = await req.json();
 
     // Formularios de recursos solo requieren nombre, empresa y email
     const isRecurso = !!fuente && !motivo;
@@ -36,6 +36,7 @@ export async function POST(req: NextRequest) {
       fuente ? `Fuente: ${fuente}` : null,
       empresa ? `Empresa: ${empresa}` : null,
       motivo ? `Motivo: ${motivo}` : null,
+      activos ? `N° de activos: ${activos}` : null,
       comentarios ? `Comentarios: ${comentarios}` : null,
     ].filter(Boolean).join('\n\n');
 

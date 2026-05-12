@@ -123,7 +123,7 @@ function LogoCarousel() {
               key={i}
               className="flex items-center justify-center px-10 min-w-[160px] h-14"
             >
-              <img src={client.logo} alt={client.name} className={`${client.size ?? 'h-10'} w-auto object-contain opacity-60 hover:opacity-100 transition-opacity`} />
+              <img src={client.logo} alt={client.name} className={`${client.size ?? 'h-10'} w-auto object-contain opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all`} />
             </div>
           ))}
         </div>

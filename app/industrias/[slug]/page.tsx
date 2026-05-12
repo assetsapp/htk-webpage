@@ -197,7 +197,7 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
         <section className="bg-surface-base py-20">
           <div className="max-w-8xl mx-auto px-6 md:px-10">
             <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4">Por área</p>
-            <h2 className="mb-10">Este problema impacta directamente la operación clínica</h2>
+            <h2 className="mb-10">Este problema impacta directamente toda la operación</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
               {(industry.profiles as { role: string; quote: string }[]).map((profile) => (
                 <div key={profile.role} className="p-5 bg-surface-raised border border-border-subtle rounded-card">
