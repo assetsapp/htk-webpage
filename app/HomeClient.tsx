@@ -32,10 +32,26 @@ function icpIcon(icon: string) {
 function Section({ children, className = '', alt = false }: { children: React.ReactNode; className?: string; alt?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
+    const element = ref.current;
+    if (!element) return;
+
+    // Check if already in viewport on first render to avoid opacity-0 flash
+    const rect = element.getBoundingClientRect();
+    const inViewport = rect.top < window.innerHeight;
+
+    if (inViewport) {
+      // Batched in React 18 → single render, no flash
+      setVisible(true);
+      setIsClient(true);
+      return;
+    }
+
+    setIsClient(true);
     const obs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setVisible(true); obs.disconnect(); } }, { threshold: 0.08 });
-    if (ref.current) obs.observe(ref.current);
+    obs.observe(element);
     return () => obs.disconnect();
   }, []);
 
@@ -45,7 +61,7 @@ function Section({ children, className = '', alt = false }: { children: React.Re
       className={`py-24 md:py-20 ${alt ? 'bg-surface-alt' : 'bg-surface-base'} ${className}`}
     >
       <div
-        className={`max-w-8xl mx-auto px-6 md:px-10 transition-all duration-700 ${visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}
+        className={`max-w-8xl mx-auto px-6 md:px-10 transition-all duration-700 ${isClient && !visible ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}
       >
         {children}
       </div>
@@ -364,6 +380,10 @@ function Industries() {
             <img
               src={ind.image}
               alt={ind.title}
+              loading="lazy"
+              decoding="async"
+              width={400}
+              height={208}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/40 to-ink/10" />
