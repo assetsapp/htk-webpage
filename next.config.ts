@@ -14,17 +14,17 @@ const nextConfig: NextConfig = {
       // Páginas antiguas indexadas en Google → redirección 301 permanente
       {
         source: '/inventario-inteligente-de-activos',
-        destination: '/soluciones/control-visibilidad-activos',
+        destination: '/soluciones/identificacion-inteligente',
         permanent: true,
       },
       {
         source: '/inventario-inteligente-activo-electronico',
-        destination: '/soluciones/control-visibilidad-activos',
+        destination: '/soluciones/identificacion-inteligente',
         permanent: true,
       },
       {
         source: '/inventario-inteligente-de-mobiliario-y-equipo-de-oficina',
-        destination: '/soluciones/control-visibilidad-activos',
+        destination: '/soluciones/identificacion-inteligente',
         permanent: true,
       },
       {
