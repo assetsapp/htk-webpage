@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://htk-id.com';
+export const SITE_URL = 'https://www.htk-id.com';
 export const SITE_NAME = 'HTK Identificación Inteligente';
 export const DEFAULT_DESCRIPTION =
   'HTK conecta el mundo físico con decisiones confiables. Control, trazabilidad y automatización de activos para empresas que no pueden permitirse perder el control.';

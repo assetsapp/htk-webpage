@@ -11,6 +11,13 @@ const nextConfig: NextConfig = {
   },
   async redirects() {
     return [
+      // Canonical: non-www → www (301 permanente)
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'htk-id.com' }],
+        destination: 'https://www.htk-id.com/:path*',
+        permanent: true,
+      },
       // Páginas antiguas indexadas en Google → redirección 301 permanente
       {
         source: '/inventario-inteligente-de-activos',
