@@ -3097,5 +3097,6 @@ export const navItems = [
       { label: 'Checklist de control', href: '/recursos/checklist-control-activos', description: '30 puntos clave para auditar tu operación' },
     ],
   },
+  { label: 'Blog', href: '/blog' },
   { label: 'Nosotros', href: '/nosotros' },
 ];

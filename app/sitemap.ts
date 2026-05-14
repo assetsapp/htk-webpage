@@ -1,6 +1,7 @@
 import { MetadataRoute } from 'next';
 import { icps, industries, solutions, caseApplications, caseSuccesses } from '@/data/content';
 import { SITE_URL } from '@/lib/seo';
+import { getAllPostsMeta } from '@/lib/blog';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const now = new Date();
@@ -10,11 +11,19 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/nosotros`, lastModified: now, changeFrequency: 'monthly', priority: 0.7 },
     { url: `${SITE_URL}/sesion`, lastModified: now, changeFrequency: 'monthly', priority: 0.9 },
     { url: `${SITE_URL}/casos-exito`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
+    { url: `${SITE_URL}/blog`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
     { url: `${SITE_URL}/soluciones/plataforma`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/recursos/autodiagnostico-control-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/recursos/calculadora-roi-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/recursos/checklist-control-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
   ];
+
+  const blogPages: MetadataRoute.Sitemap = getAllPostsMeta().map((p) => ({
+    url: `${SITE_URL}/blog/${p.slug}`,
+    lastModified: new Date(`${p.date}T12:00:00`),
+    changeFrequency: 'monthly',
+    priority: 0.7,
+  }));
 
   const problemPages: MetadataRoute.Sitemap = icps.map((p) => ({
     url: `${SITE_URL}/problemas/${p.slug}`,
@@ -53,6 +62,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   return [
     ...staticPages,
+    ...blogPages,
     ...problemPages,
     ...industryPages,
     ...solutionPages,
