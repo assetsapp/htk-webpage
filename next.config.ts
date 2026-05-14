@@ -1,4 +1,5 @@
 import type { NextConfig } from 'next';
+import { blogRedirects } from './lib/blog-redirects';
 
 const nextConfig: NextConfig = {
   images: {
@@ -39,6 +40,8 @@ const nextConfig: NextConfig = {
         destination: '/nosotros',
         permanent: true,
       },
+      // Blog WordPress anterior → blog nuevo (301)
+      ...blogRedirects,
     ];
   },
 };

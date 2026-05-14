@@ -71,3 +71,38 @@ export function faqSchema(items: { question: string; answer: string }[]) {
     })),
   };
 }
+
+export function articleSchema(article: {
+  title: string;
+  description: string;
+  slug: string;
+  date: string;
+  author: string;
+  cover?: string;
+}) {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    headline: article.title,
+    description: article.description,
+    datePublished: article.date,
+    dateModified: article.date,
+    author: { '@type': 'Person', name: article.author },
+    publisher: {
+      '@type': 'Organization',
+      name: SITE_NAME,
+      logo: { '@type': 'ImageObject', url: `${SITE_URL}/htk-logo-navbar.webp` },
+    },
+    mainEntityOfPage: {
+      '@type': 'WebPage',
+      '@id': `${SITE_URL}/blog/${article.slug}`,
+    },
+    ...(article.cover
+      ? {
+          image: article.cover.startsWith('http')
+            ? article.cover
+            : `${SITE_URL}${article.cover}`,
+        }
+      : {}),
+  };
+}
