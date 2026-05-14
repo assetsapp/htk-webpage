@@ -1,0 +1,57 @@
+---
+title: "Cómo codificar activos fijos para un inventario"
+excerpt: "Un buen esquema de codificación es la base de un inventario que se puede mantener. Qué debe tener, qué errores evitar y cómo elegir entre código inteligente y secuencial."
+date: "2025-11-13"
+category: "Inventario"
+author: "Vanessa Graos"
+draft: false
+---
+
+La codificación de activos parece un detalle técnico menor. No lo es. Un esquema de codificación mal diseñado convierte cada inventario futuro en un dolor de cabeza; uno bien diseñado hace que el control se sostenga durante años. Este artículo explica cómo hacerlo bien.
+
+## Qué es codificar un activo fijo
+
+Codificar es asignar a cada activo un **identificador único** que lo distingue de todos los demás y lo vincula a su registro digital. Ese código se materializa en una etiqueta física —de código de barras, QR o RFID— adherida al activo.
+
+El código es el puente entre el objeto físico y su información. Sin él, un activo es indistinguible de otro igual.
+
+## La decisión clave: código inteligente vs. secuencial
+
+Hay dos filosofías:
+
+### Código secuencial
+
+Un número correlativo simple: 000001, 000002, 000003. El código no significa nada por sí mismo —solo identifica.
+
+- **Ventaja:** simple, no se rompe nunca, no hay que rediseñarlo cuando cambia la operación.
+- **Desventaja:** el código no te dice nada sin consultar el sistema.
+
+### Código inteligente
+
+El código incorpora información: por ejemplo, `MTY-PROD-MAQ-0042` podría significar planta Monterrey, área de producción, maquinaria, activo 42.
+
+- **Ventaja:** legible para humanos, da contexto sin consultar el sistema.
+- **Desventaja:** frágil. Si un activo cambia de planta o de área, el código miente. Y rediseñar la estructura es costoso.
+
+**La recomendación general:** código secuencial para el identificador, y deja que la información —ubicación, área, tipo— viva en el sistema, donde puede cambiar sin romper nada. El activo se mueve; su identidad no debería.
+
+## Qué debe cumplir un buen esquema de codificación
+
+1. **Unicidad absoluta:** ningún código se repite, nunca.
+2. **Permanencia:** el código acompaña al activo toda su vida, sin importar dónde esté o quién lo use.
+3. **Independencia de la ubicación:** el código identifica el activo, no su lugar actual.
+4. **Compatibilidad con la tecnología:** el formato debe funcionar con las etiquetas que vas a usar.
+5. **Escalabilidad:** que tenga espacio para crecer sin rediseñarse.
+
+## Errores frecuentes al codificar
+
+- **Meter demasiada información en el código.** Cuanto más "dice" el código, más rápido queda obsoleto.
+- **Reutilizar códigos de activos dados de baja.** Rompe la trazabilidad histórica.
+- **Codificar sin etiquetar.** Un código que solo vive en una hoja de cálculo no sirve en campo.
+- **No definir el esquema antes del inventario.** Codificar sobre la marcha produce inconsistencias imposibles de limpiar después.
+
+## La codificación es una decisión de una sola vez
+
+Vale la pena invertir tiempo en definir bien el esquema **antes** del primer inventario, porque cambiarlo después significa re-etiquetar todo. Es de esas decisiones que se toman una vez y se viven durante años.
+
+[Agenda una sesión de análisis](/sesion) y te ayudamos a definir un esquema de codificación que aguante el crecimiento de tu operación.
