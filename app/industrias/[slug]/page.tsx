@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { industries, icps, solutions, caseApplications, caseSuccesses } from '@/data/content';
-import { buildMeta } from '@/lib/seo';
+import { buildMeta, breadcrumbSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -71,6 +71,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: 'Inicio', href: '/' },
+          { name: 'Industrias', href: '/industrias' },
+          { name: industry.title, href: `/industrias/${industry.slug}` },
+        ])) }}
+      />
       {/* Hero */}
       <section className="bg-surface-base pt-28 pb-20 border-b border-border-subtle">
         <div className="max-w-8xl mx-auto px-6 md:px-10">

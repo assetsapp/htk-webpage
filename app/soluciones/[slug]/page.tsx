@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { buildMeta } from '@/lib/seo';
+import { buildMeta, breadcrumbSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -51,6 +51,14 @@ export default async function SolutionPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: 'Inicio', href: '/' },
+          { name: 'Soluciones', href: '/soluciones' },
+          { name: solution.title, href: `/soluciones/${solution.slug}` },
+        ])) }}
+      />
       {/* Hero */}
       <section className="bg-surface-base pt-28 pb-20 border-b border-border-subtle">
         <div className="max-w-8xl mx-auto px-6 md:px-10">
