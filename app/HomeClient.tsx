@@ -102,7 +102,7 @@ function Hero() {
               href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn transition-all duration-200 hover:bg-brand-hover"
             >
-              Solicitar diagnóstico
+              Agendar sesión gratuita
               <ArrowRight />
             </Link>
           </div>
@@ -638,7 +638,7 @@ function DarkCTA() {
             href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
-            Solicitar diagnóstico <ArrowRight />
+            Agendar sesión gratuita <ArrowRight />
           </Link>
         </div>
       </div>

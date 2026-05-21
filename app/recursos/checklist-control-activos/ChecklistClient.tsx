@@ -352,7 +352,7 @@ export default function ChecklistPage() {
                   href="/sesion"
                   className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
                 >
-                  Solicitar diagnóstico
+                  Agendar sesión gratuita
                 </Link>
               </div>
             )}
@@ -428,7 +428,7 @@ export default function ChecklistPage() {
               href="/sesion"
               className="inline-flex items-center gap-2 px-7 py-3.5 border border-white/30 text-white text-sm font-medium rounded-btn hover:bg-white/10 transition-colors"
             >
-              Solicitar diagnóstico
+              Agendar sesión gratuita
             </Link>
           </div>
         </div>

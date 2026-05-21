@@ -441,7 +441,7 @@ export default function AutodiagnosticoPage() {
               href="/sesion"
               className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3.5 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
             >
-              Solicitar diagnóstico
+              Agendar sesión gratuita
             </Link>
           </div>
           <Link

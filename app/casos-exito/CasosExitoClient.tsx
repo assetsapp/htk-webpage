@@ -71,7 +71,7 @@ export default function CasosExitoPage() {
                 href="/sesion"
                 className="inline-flex items-center gap-2 px-6 py-3 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
               >
-                Solicitar diagnóstico <ArrowRight />
+                Agendar sesión gratuita <ArrowRight />
               </Link>
               <Link
                 href="/soluciones/plataforma"
@@ -276,7 +276,7 @@ export default function CasosExitoPage() {
             href="/sesion"
             className="inline-flex items-center gap-2 px-7 py-3.5 bg-brand text-surface-dark text-sm font-medium rounded-btn hover:bg-brand-hover transition-colors"
           >
-            Solicitar diagnóstico <ArrowRight />
+            Agendar sesión gratuita <ArrowRight />
           </Link>
         </div>
       </section>
