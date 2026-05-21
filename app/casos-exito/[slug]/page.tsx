@@ -5,7 +5,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const { slug } = await params;
   const cs = (await import('@/data/content')).caseSuccesses.find((c) => c.slug === slug);
   if (!cs) return {};
-  return buildMeta(`Caso de éxito: ${cs.client}`, `${cs.result}`, `/casos-exito/${slug}`);
+  const desc = ('metaDescription' in cs && cs.metaDescription) ? cs.metaDescription as string : cs.result;
+  return buildMeta(`Caso de éxito: ${cs.client}`, desc, `/casos-exito/${slug}`);
 }
 
 import { notFound } from 'next/navigation';
