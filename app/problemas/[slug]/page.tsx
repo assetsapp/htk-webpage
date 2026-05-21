@@ -400,13 +400,29 @@ export default async function ICPPage({ params }: { params: Promise<{ slug: stri
             <h2 className="mb-10">Empresas que pasaron de incertidumbre a control</h2>
             {'icpSuccessCards' in icp && icp.icpSuccessCards ? (
               <div className="grid md:grid-cols-3 gap-5">
-                {icp.icpSuccessCards.map((card) => (
-                  <div key={card.client} className="p-6 bg-surface-raised border border-border-subtle rounded-card">
-                    <div className="text-3xl font-medium text-brand mb-1">{card.metric}</div>
-                    <div className="text-xs font-medium text-ink-300 mb-3">{card.metricLabel}</div>
-                    <p className="text-sm font-medium text-ink">{card.client}</p>
-                  </div>
-                ))}
+                {icp.icpSuccessCards.map((card) => {
+                  const inner = (
+                    <>
+                      <div className="text-3xl font-medium text-brand mb-1">{card.metric}</div>
+                      <div className="text-xs font-medium text-ink-300 mb-3">{card.metricLabel}</div>
+                      <p className="text-sm font-medium text-ink mb-1">{card.client}</p>
+                      {'caseSlug' in card && card.caseSlug && (
+                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
+                          Ver caso <ArrowRight />
+                        </span>
+                      )}
+                    </>
+                  );
+                  return 'caseSlug' in card && card.caseSlug ? (
+                    <Link key={card.client} href={`/casos-exito/${card.caseSlug}`} className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all">
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div key={card.client} className="p-6 bg-surface-raised border border-border-subtle rounded-card">
+                      {inner}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="grid md:grid-cols-3 gap-5">

@@ -91,7 +91,7 @@ export const icps = [
         'Sin una base confiable de activos, se vuelve más difícil sustentar deducciones fiscales, responder auditorías y mantener control interno sobre la información financiera.',
     },
     icpSuccessCards: [
-      { client: 'Cliente Retail', metric: '+25,000', metricLabel: 'activos conciliados sin discrepancias' },
+      { client: 'Cinépolis', metric: '+90%', metricLabel: 'reducción en tiempo de auditoría en +400 sedes', caseSlug: 'cinepolis' },
       { client: 'Cliente Manufactura', metric: '0', metricLabel: 'base de activos lista para auditoría sin observaciones' },
       { client: 'Cliente Corporativo', metric: '100%', metricLabel: 'visibilidad completa de activos en múltiples sedes' },
     ],
@@ -252,7 +252,7 @@ export const icps = [
       footer: 'Cuando esto no se puede responder, el activo deja de ser un recurso controlado y se convierte en una fuente de incertidumbre.',
     },
     icpSuccessCards: [
-      { client: 'Cliente Retail', metric: '100%', metricLabel: 'Visibilidad total de activos en múltiples sucursales' },
+      { client: 'ABC Querétaro', metric: '0', metricLabel: 'recompras no planeadas tras control total de contenedores', caseSlug: 'abc-queretaro' },
       { client: 'Cliente Logística', metric: '✓', metricLabel: 'Trazabilidad completa de activos móviles' },
       { client: 'Cliente Salud', metric: 'Real-time', metricLabel: 'Control en tiempo real de equipos críticos' },
     ],
@@ -346,7 +346,7 @@ export const icps = [
       ],
     },
     icpSuccessCards: [
-      { client: 'Cliente Salud', metric: 'Min.', metricLabel: 'Equipos críticos localizables en minutos' },
+      { client: 'Grupo GIA', metric: '100%', metricLabel: 'disponibilidad de activos médicos críticos garantizada', caseSlug: 'grupo-gia' },
       { client: 'Cliente Logística', metric: '100%', metricLabel: 'Visibilidad completa de activos móviles' },
       { client: 'Cliente Servicios', metric: '✓', metricLabel: 'Control total de activos en múltiples operaciones' },
     ],
@@ -566,8 +566,8 @@ export const industries = [
     ],
     solutionSlugs: ['identificacion-inteligente', 'control-trazabilidad', 'integracion-informacion', 'automatizacion-procesos'],
     industrySuccessCards: [
-      { client: 'Cliente Manufactura / IMMEX', metric: '✓', metricLabel: 'Conciliación completa sin discrepancias' },
-      { client: 'Cliente Planta multi-sede', metric: '100%', metricLabel: 'Visibilidad total de activos en distintas ubicaciones' },
+      { client: 'ABC Querétaro', metric: '0', metricLabel: 'recompras no planeadas tras automatizar flujo de contenedores', caseSlug: 'abc-queretaro' },
+      { client: 'Vidrio Formas', metric: '100%', metricLabel: 'trazabilidad de producción integrada a la operación', caseSlug: 'vidrio-formas' },
       { client: 'Cliente Industrial', metric: '0', metricLabel: 'Cumplimiento sin observaciones en auditoría' },
     ],
     ctaHeadline: 'Si no puedes controlar tus activos, no puedes controlar tu operación.',
