@@ -49,7 +49,7 @@ const activosOptions = [
 
 type FormState = 'idle' | 'loading' | 'sent' | 'error';
 
-export default function SesionPage() {
+export default function SesionPage({ faqs = [] }: { faqs?: { question: string; answer: string }[] }) {
   const router = useRouter();
   const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', activos: '', comentarios: '' });
   const [formState, setFormState] = useState<FormState>('idle');
@@ -389,6 +389,27 @@ export default function SesionPage() {
           </div>
         </div>
       </section>
+
+      {/* ── FAQs ─────────────────────────────────────────────────────── */}
+      {faqs.length > 0 && (
+        <section className="bg-surface-alt py-20 border-t border-border-subtle">
+          <div className="max-w-8xl mx-auto px-6 md:px-10 max-w-3xl mx-auto">
+            <p className="text-xs font-medium tracking-widest uppercase text-brand mb-4 text-center">Preguntas frecuentes</p>
+            <h2 className="text-center mb-10">Lo que suelen preguntar antes de agendar</h2>
+            <div className="space-y-4">
+              {faqs.map((faq, i) => (
+                <details key={i} className="group bg-surface-raised border border-border-subtle rounded-card p-6 cursor-pointer">
+                  <summary className="flex items-center justify-between gap-4 text-sm font-medium text-ink list-none">
+                    {faq.question}
+                    <span className="flex-shrink-0 w-5 h-5 rounded-full border border-border-subtle flex items-center justify-center text-ink-300 group-open:rotate-45 transition-transform">+</span>
+                  </summary>
+                  <p className="mt-4 text-sm text-ink-500 leading-relaxed">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* ── RECURSOS PREVIOS ─────────────────────────────────────────── */}
       <section className="bg-surface-base py-16 border-t border-border-subtle">

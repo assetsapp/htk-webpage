@@ -1,11 +1,12 @@
 import type { Metadata } from 'next';
-import { buildMeta } from '@/lib/seo';
+import { buildMeta, breadcrumbSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const cs = (await import('@/data/content')).caseSuccesses.find((c) => c.slug === slug);
   if (!cs) return {};
-  return buildMeta(`Caso de éxito: ${cs.client}`, `${cs.result}`, `/casos-exito/${slug}`);
+  const desc = ('metaDescription' in cs && cs.metaDescription) ? cs.metaDescription as string : cs.result;
+  return buildMeta(`Caso de éxito: ${cs.client}`, desc, `/casos-exito/${slug}`);
 }
 
 import { notFound } from 'next/navigation';
@@ -57,6 +58,14 @@ export default async function CaseSuccessPage({ params }: { params: Promise<{ sl
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: 'Inicio', href: '/' },
+          { name: 'Casos de éxito', href: '/casos-exito' },
+          { name: cs.client, href: `/casos-exito/${cs.slug}` },
+        ])) }}
+      />
       {/* Hero */}
       <section className="bg-surface-base pt-28 pb-20 border-b border-border-subtle">
         <div className="max-w-8xl mx-auto px-6 md:px-10">

@@ -2,7 +2,7 @@ import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { industries, icps, solutions, caseApplications, caseSuccesses } from '@/data/content';
-import { buildMeta } from '@/lib/seo';
+import { buildMeta, breadcrumbSchema } from '@/lib/seo';
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
@@ -71,6 +71,14 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
 
   return (
     <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema([
+          { name: 'Inicio', href: '/' },
+          { name: 'Industrias', href: '/industrias' },
+          { name: industry.title, href: `/industrias/${industry.slug}` },
+        ])) }}
+      />
       {/* Hero */}
       <section className="bg-surface-base pt-28 pb-20 border-b border-border-subtle">
         <div className="max-w-8xl mx-auto px-6 md:px-10">
@@ -306,13 +314,29 @@ export default async function IndustryPage({ params }: { params: Promise<{ slug:
             <h2 className="mb-10">Instituciones que pasaron de buscar equipos a tenerlos disponibles</h2>
             {'industrySuccessCards' in industry && industry.industrySuccessCards ? (
               <div className="grid md:grid-cols-3 gap-5">
-                {(industry.industrySuccessCards as { client: string; metric: string; metricLabel: string }[]).map((card) => (
-                  <div key={card.client} className="p-6 bg-surface-raised border border-border-subtle rounded-card">
-                    <div className="text-3xl font-medium text-brand mb-1">{card.metric}</div>
-                    <div className="text-xs font-medium text-ink-300 mb-3">{card.metricLabel}</div>
-                    <p className="text-sm font-medium text-ink">{card.client}</p>
-                  </div>
-                ))}
+                {(industry.industrySuccessCards as { client: string; metric: string; metricLabel: string; caseSlug?: string }[]).map((card) => {
+                  const inner = (
+                    <>
+                      <div className="text-2xl font-medium text-brand mb-1">{card.metric}</div>
+                      <div className="text-xs font-medium text-ink-300 mb-3">{card.metricLabel}</div>
+                      <p className="text-sm font-medium text-ink mb-1">{card.client}</p>
+                      {card.caseSlug && (
+                        <span className="inline-flex items-center gap-1.5 text-sm font-medium text-brand group-hover:gap-3 transition-all">
+                          Ver caso <ArrowRight />
+                        </span>
+                      )}
+                    </>
+                  );
+                  return card.caseSlug ? (
+                    <Link key={card.client} href={`/casos-exito/${card.caseSlug}`} className="group p-6 bg-surface-raised border border-border-subtle rounded-card hover:border-brand/30 hover:shadow-sm transition-all">
+                      {inner}
+                    </Link>
+                  ) : (
+                    <div key={card.client} className="p-6 bg-surface-raised border border-border-subtle rounded-card">
+                      {inner}
+                    </div>
+                  );
+                })}
               </div>
             ) : (
               <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
