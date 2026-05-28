@@ -74,7 +74,7 @@ export default function CasosExitoPage() {
                 Agendar sesión gratuita <ArrowRight />
               </Link>
               <Link
-                href="/soluciones/plataforma"
+                href="/plataforma/tagventory"
                 className="inline-flex items-center gap-2 px-6 py-3 border border-ink-700 text-ink-700 text-sm font-medium rounded-btn hover:bg-surface-alt transition-colors"
               >
                 Ver soluciones

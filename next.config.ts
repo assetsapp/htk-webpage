@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         destination: 'https://www.htk-id.com/:path*',
         permanent: true,
       },
+      // /soluciones/plataforma → reemplazada por /plataforma/tagventory
+      {
+        source: '/soluciones/plataforma',
+        destination: '/plataforma/tagventory',
+        permanent: true,
+      },
       // Páginas antiguas indexadas en Google → redirección 301 permanente
       {
         source: '/inventario-inteligente-de-activos',

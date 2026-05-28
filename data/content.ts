@@ -3074,10 +3074,9 @@ export const navItems = [
   },
   {
     label: 'Soluciones',
-    href: '/soluciones/plataforma',
+    href: '/plataforma/tagventory',
     dropdown: [
       { label: 'Tagventory', href: '/plataforma/tagventory', description: 'La plataforma central de control de activos HTK', group: 'Plataforma' },
-      { label: 'Plataforma HTK', href: '/soluciones/plataforma', description: 'Cómo funciona el sistema completo', group: 'Plataforma' },
       ...solutions.map(s => ({ label: s.title, href: `/soluciones/${s.slug}`, description: s.tagline, group: 'Capacidades' })),
     ],
   },
