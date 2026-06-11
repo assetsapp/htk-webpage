@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { sendCapiEvent } from '@/lib/capi';
 
 const ZOHO_TOKEN_URL = `https://accounts.zoho.${process.env.ZOHO_REGION}/oauth/v2/token`;
 const ZOHO_CONTACTS_URL = `https://www.zohoapis.${process.env.ZOHO_REGION}/crm/v2/Contacts`;
@@ -67,6 +68,20 @@ export async function POST(req: NextRequest) {
       console.error('Zoho error:', zohoData.data[0]);
       return NextResponse.json({ error: 'Error al crear lead en Zoho' }, { status: 500 });
     }
+
+    sendCapiEvent({
+      event_name: 'CompleteRegistration',
+      event_time: Math.floor(Date.now() / 1000),
+      action_source: 'website',
+      user_data: {
+        email,
+        phone: telefono,
+        first_name: firstName,
+        last_name: lastName,
+        client_ip_address: req.headers.get('x-forwarded-for')?.split(',')[0] ?? undefined,
+        client_user_agent: req.headers.get('user-agent') ?? undefined,
+      },
+    });
 
     return NextResponse.json({ ok: true });
   } catch (err) {
