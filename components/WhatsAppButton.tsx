@@ -1,5 +1,6 @@
 'use client';
 import { pushEvent } from '@/lib/gtm';
+import { trackMetaEvent } from '@/lib/meta';
 
 export default function WhatsAppButton() {
   const phone = '525517610313';
@@ -12,7 +13,7 @@ export default function WhatsAppButton() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="Contactar por WhatsApp"
-      onClick={() => pushEvent({ event: 'click_whatsapp' })}
+      onClick={() => { pushEvent({ event: 'click_whatsapp' }); trackMetaEvent('Contact', { method: 'whatsapp' }); }}
       className="fixed bottom-6 right-6 z-50 flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-transform duration-200 hover:scale-110"
       style={{ backgroundColor: '#25D366' }}
     >

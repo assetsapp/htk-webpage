@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { pushEvent } from '@/lib/gtm';
+import { trackMetaEvent } from '@/lib/meta';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -69,6 +70,7 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
       });
       if (res.ok) {
         pushEvent({ event: 'lead_formulario_sesion' });
+        trackMetaEvent('CompleteRegistration', { content_category: 'tagventory' });
         router.push('/sesion/gracias');
       } else {
         setFormState('error');

@@ -1,5 +1,6 @@
 'use client';
 import { pushEvent } from '@/lib/gtm';
+import { trackMetaEvent } from '@/lib/meta';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -149,6 +150,7 @@ export default function ChecklistPage() {
         a.click();
         URL.revokeObjectURL(url);
         pushEvent({ event: 'lead_descarga_recurso', recurso: 'checklist-control-activos' });
+        trackMetaEvent('SubmitApplication', { content_name: 'checklist-control-activos' });
         setFormState('sent');
       } else {
         setFormState('error');
