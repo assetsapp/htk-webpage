@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ScrollToTop';
 import WhatsAppButton from '@/components/WhatsAppButton';
 import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, organizationSchema } from '@/lib/seo';
-import { GTM_ID } from '@/lib/gtm';
+import { GTM_ID, META_PIXEL_ID } from '@/lib/gtm';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -30,6 +30,9 @@ export const metadata: Metadata = {
   },
   twitter: { card: 'summary_large_image' },
   robots: { index: true, follow: true },
+  other: {
+    'facebook-domain-verification': 'y3kfkx3f75yp3efmxzm418io22jyci',
+  },
 };
 
 export default function RootLayout({
@@ -69,6 +72,16 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);`,
         <noscript>
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img height="1" width="1" style={{ display: 'none' }} alt="" src="https://px.ads.linkedin.com/collect/?pid=9335420&fmt=gif" />
+        </noscript>
+        {/* Meta Pixel */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`,
+          }}
+        />
+        <noscript>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img height="1" width="1" style={{ display: 'none' }} alt="" src={`https://www.facebook.com/tr?id=${META_PIXEL_ID}&ev=PageView&noscript=1`} />
         </noscript>
         {/* Preconnect para recursos externos críticos */}
         <link rel="preconnect" href="https://images.pexels.com" />

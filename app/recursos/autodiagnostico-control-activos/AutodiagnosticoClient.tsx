@@ -1,5 +1,6 @@
 'use client';
 import { pushEvent } from '@/lib/gtm';
+import { trackMetaEvent } from '@/lib/meta';
 
 import { useState } from 'react';
 import Link from 'next/link';
@@ -226,6 +227,7 @@ export default function AutodiagnosticoPage() {
         a.click();
         URL.revokeObjectURL(url);
         pushEvent({ event: 'lead_descarga_recurso', recurso: 'autodiagnostico-control-activos' });
+        trackMetaEvent('SubmitApplication', { content_name: 'autodiagnostico-control-activos' });
         setFormState('sent');
       } else {
         setFormState('error');

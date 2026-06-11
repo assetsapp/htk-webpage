@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { solutions, industries } from '@/data/content';
 import { pushEvent } from '@/lib/gtm';
+import { trackMetaEvent } from '@/lib/meta';
 
 export default function Footer() {
   return (
@@ -73,7 +74,7 @@ export default function Footer() {
                 </svg>
                 ventas@htk-id.com
               </a>
-              <a href="tel:+525517610313" onClick={() => pushEvent({ event: 'click_telefono' })} className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
+              <a href="tel:+525517610313" onClick={() => { pushEvent({ event: 'click_telefono' }); trackMetaEvent('Contact', { method: 'phone' }); }} className="text-sm text-ink-500 hover:text-brand transition-colors flex items-center gap-2">
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                   <path d="M3 3c.5-.5 1.5-.5 2 0l1.5 2c.3.5.2 1-.2 1.4L5.5 7.2c.7 1.4 1.9 2.6 3.3 3.3l.8-.8c.4-.4.9-.5 1.4-.2L13 11c.5.5.5 1.5 0 2l-.8.8c-1 1-4.2.5-7.3-2.7C1.8 7.8 1.3 4.5 3 3z" />
                 </svg>

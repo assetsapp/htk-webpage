@@ -1,4 +1,5 @@
 export const GTM_ID = 'GTM-P8NBBQW3';
+export const META_PIXEL_ID = '1027328306497559';
 
 // Tipos de eventos
 type GtmEvent =
