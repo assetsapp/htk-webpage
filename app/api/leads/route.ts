@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     // Enviar correo siempre, independiente del resultado de Zoho — falla silenciosamente
     sendMail({
-      to: 'proyectos@htk-id.com, gabriel.h@htl-id.com, ventas@htk-id.com',
+      to: 'proyectos@htk-id.com, gabriel.h@htk-id.com, ventas@htk-id.com',
       subject: `Nuevo lead: ${nombre} ${lastName} — ${empresa}`,
       html: `
         <h2>Nuevo registro desde el sitio web</h2>
