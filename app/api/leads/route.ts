@@ -64,13 +64,10 @@ export async function POST(req: NextRequest) {
     });
 
     const zohoData = await zohoRes.json();
+    const zohoFailed = zohoData.data?.[0]?.status === 'error';
+    if (zohoFailed) console.error('Zoho error:', zohoData.data[0]);
 
-    if (zohoData.data?.[0]?.status === 'error') {
-      console.error('Zoho error:', zohoData.data[0]);
-      return NextResponse.json({ error: 'Error al crear lead en Zoho' }, { status: 500 });
-    }
-
-    // Enviar notificación por correo — falla silenciosamente para no bloquear la respuesta
+    // Enviar correo siempre, independiente del resultado de Zoho — falla silenciosamente
     sendMail({
       to: 'proyectos@htk-id.com, gabriel.h@htl-id.com, ventas@htk-id.com',
       subject: `Nuevo lead: ${nombre} ${lastName} — ${empresa}`,
@@ -89,6 +86,10 @@ export async function POST(req: NextRequest) {
         </table>
       `,
     }).catch((err) => console.error('Error enviando correo de lead:', err));
+
+    if (zohoFailed) {
+      return NextResponse.json({ error: 'Error al crear lead en Zoho' }, { status: 500 });
+    }
 
     sendCapiEvent({
       event_name: 'CompleteRegistration',
