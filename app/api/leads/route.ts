@@ -67,8 +67,8 @@ export async function POST(req: NextRequest) {
     const zohoFailed = zohoData.data?.[0]?.status === 'error';
     if (zohoFailed) console.error('Zoho error:', zohoData.data[0]);
 
-    // Enviar correo siempre, independiente del resultado de Zoho — falla silenciosamente
-    sendMail({
+    // Enviar correo siempre, independiente del resultado de Zoho
+    await sendMail({
       to: 'proyectos@htk-id.com, gabriel.h@htk-id.com, ventas@htk-id.com',
       subject: `Nuevo lead: ${nombre} ${lastName} — ${empresa}`,
       html: `
