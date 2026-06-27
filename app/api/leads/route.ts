@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendCapiEvent } from '@/lib/capi';
+import { sendMail } from '@/lib/mail';
 
 const ZOHO_TOKEN_URL = `https://accounts.zoho.${process.env.ZOHO_REGION}/oauth/v2/token`;
 const ZOHO_CONTACTS_URL = `https://www.zohoapis.${process.env.ZOHO_REGION}/crm/v2/Contacts`;
@@ -68,6 +69,26 @@ export async function POST(req: NextRequest) {
       console.error('Zoho error:', zohoData.data[0]);
       return NextResponse.json({ error: 'Error al crear lead en Zoho' }, { status: 500 });
     }
+
+    // Enviar notificación por correo — falla silenciosamente para no bloquear la respuesta
+    sendMail({
+      to: 'proyectos@htk-id.com',
+      subject: `Nuevo lead: ${nombre} ${lastName} — ${empresa}`,
+      html: `
+        <h2>Nuevo registro desde el sitio web</h2>
+        <table cellpadding="6" cellspacing="0" border="1" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
+          <tr><th align="left">Campo</th><th align="left">Valor</th></tr>
+          <tr><td>Nombre</td><td>${nombre} ${lastName}</td></tr>
+          <tr><td>Empresa</td><td>${empresa}</td></tr>
+          <tr><td>Email</td><td>${email}</td></tr>
+          ${telefono ? `<tr><td>Teléfono</td><td>${telefono}</td></tr>` : ''}
+          ${fuente ? `<tr><td>Fuente</td><td>${fuente}</td></tr>` : ''}
+          ${motivo ? `<tr><td>Motivo</td><td>${motivo}</td></tr>` : ''}
+          ${activos ? `<tr><td>N° de activos</td><td>${activos}</td></tr>` : ''}
+          ${comentarios ? `<tr><td>Comentarios</td><td>${comentarios}</td></tr>` : ''}
+        </table>
+      `,
+    }).catch((err) => console.error('Error enviando correo de lead:', err));
 
     sendCapiEvent({
       event_name: 'CompleteRegistration',
