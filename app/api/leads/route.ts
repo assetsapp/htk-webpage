@@ -24,7 +24,11 @@ async function getAccessToken(): Promise<string> {
 
 export async function POST(req: NextRequest) {
   try {
-    const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente } = await req.json();
+    const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente, _hp, _t } = await req.json();
+
+    // Anti-bot: honeypot (bots llenan campos ocultos) y time-trap (bots envían muy rápido)
+    if (_hp) return NextResponse.json({ ok: true }); // respuesta falsa para no alertar al bot
+    if (typeof _t === 'number' && _t < 3000) return NextResponse.json({ ok: true });
 
     // Formularios de recursos solo requieren nombre, empresa y email
     const isRecurso = !!fuente && !motivo;

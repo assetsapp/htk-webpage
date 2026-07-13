@@ -54,6 +54,8 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
   const router = useRouter();
   const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', activos: '', comentarios: '' });
   const [formState, setFormState] = useState<FormState>('idle');
+  const [honeypot, setHoneypot] = useState('');
+  const [loadedAt] = useState(() => Date.now());
 
   function set(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -66,7 +68,7 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(form),
+        body: JSON.stringify({ ...form, _hp: honeypot, _t: Date.now() - loadedAt }),
       });
       if (res.ok) {
         pushEvent({ event: 'lead_formulario_sesion' });
@@ -227,6 +229,14 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
                         className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors resize-none"
                       />
                     </div>
+
+                    {/* Honeypot — oculto para humanos, visible para bots */}
+                    <input
+                      type="text" name="website" value={honeypot}
+                      onChange={(e) => setHoneypot(e.target.value)}
+                      tabIndex={-1} autoComplete="off" aria-hidden="true"
+                      style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                    />
 
                     <button
                       type="submit" disabled={!isValid || formState === 'loading'}
