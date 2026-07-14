@@ -59,13 +59,14 @@ export default function Nav() {
 
   return (
     <header
+      ref={dropdownRef}
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-200 ${
         scrolled
           ? 'bg-surface-raised/95 backdrop-blur-sm border-b border-border-subtle shadow-[0_1px_0_0_#E7E5DE]'
           : 'bg-transparent'
       }`}
     >
-      <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-20" ref={dropdownRef}>
+      <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
           <img src="/htk-logo-navbar.webp" alt="HTK Identificación Inteligente" className="h-16 w-auto" />
