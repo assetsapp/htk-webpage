@@ -1,6 +1,17 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createHmac } from 'crypto';
 import { sendCapiEvent } from '@/lib/capi';
 import { sendMail } from '@/lib/mail';
+
+function isValidToken(token: unknown): boolean {
+  if (typeof token !== 'string') return false;
+  const [ts, sig] = token.split('.');
+  if (!ts || !sig) return false;
+  const age = Date.now() - Number(ts);
+  if (age < 0 || age > 30 * 60 * 1000) return false; // expira en 30 min
+  const expected = createHmac('sha256', process.env.FORM_SECRET!).update(ts).digest('hex');
+  return sig === expected;
+}
 
 // Rate limiting en memoria: máx 3 envíos por IP cada 10 minutos
 const ipLog = new Map<string, { count: number; resetAt: number }>();
@@ -38,9 +49,10 @@ async function getAccessToken(): Promise<string> {
 
 export async function POST(req: NextRequest) {
   try {
-    const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente, _hp, _t } = await req.json();
+    const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente, _hp, _t, _token } = await req.json();
 
-    // Anti-bot: honeypot, time-trap y rate limiting por IP
+    // Anti-bot: token firmado, honeypot, time-trap y rate limiting por IP
+    if (!isValidToken(_token)) return NextResponse.json({ ok: true });
     if (_hp) return NextResponse.json({ ok: true });
     if (typeof _t === 'number' && _t < 3000) return NextResponse.json({ ok: true });
     const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { pushEvent } from '@/lib/gtm';
 import { trackMetaEvent } from '@/lib/meta';
@@ -56,6 +56,11 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
   const [formState, setFormState] = useState<FormState>('idle');
   const [honeypot, setHoneypot] = useState('');
   const [loadedAt] = useState(() => Date.now());
+  const [formToken, setFormToken] = useState('');
+
+  useEffect(() => {
+    fetch('/api/leads/token').then(r => r.json()).then(d => setFormToken(d.token)).catch(() => {});
+  }, []);
 
   function set(field: string, value: string) {
     setForm((prev) => ({ ...prev, [field]: value }));
@@ -68,7 +73,7 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
       const res = await fetch('/api/leads', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ ...form, _hp: honeypot, _t: Date.now() - loadedAt }),
+        body: JSON.stringify({ ...form, _hp: honeypot, _t: Date.now() - loadedAt, _token: formToken }),
       });
       if (res.ok) {
         pushEvent({ event: 'lead_formulario_sesion' });
