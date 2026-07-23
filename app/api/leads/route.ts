@@ -2,6 +2,20 @@ import { NextRequest, NextResponse } from 'next/server';
 import { sendCapiEvent } from '@/lib/capi';
 import { sendMail } from '@/lib/mail';
 
+// Rate limiting en memoria: máx 3 envíos por IP cada 10 minutos
+const ipLog = new Map<string, { count: number; resetAt: number }>();
+function isRateLimited(ip: string): boolean {
+  const now = Date.now();
+  const entry = ipLog.get(ip);
+  if (!entry || now > entry.resetAt) {
+    ipLog.set(ip, { count: 1, resetAt: now + 10 * 60 * 1000 });
+    return false;
+  }
+  if (entry.count >= 3) return true;
+  entry.count++;
+  return false;
+}
+
 const ZOHO_TOKEN_URL = `https://accounts.zoho.${process.env.ZOHO_REGION}/oauth/v2/token`;
 const ZOHO_CONTACTS_URL = `https://www.zohoapis.${process.env.ZOHO_REGION}/crm/v2/Contacts`;
 
@@ -26,9 +40,11 @@ export async function POST(req: NextRequest) {
   try {
     const { nombre, apellido, empresa, email, telefono, motivo, activos, comentarios, fuente, _hp, _t } = await req.json();
 
-    // Anti-bot: honeypot (bots llenan campos ocultos) y time-trap (bots envían muy rápido)
-    if (_hp) return NextResponse.json({ ok: true }); // respuesta falsa para no alertar al bot
+    // Anti-bot: honeypot, time-trap y rate limiting por IP
+    if (_hp) return NextResponse.json({ ok: true });
     if (typeof _t === 'number' && _t < 3000) return NextResponse.json({ ok: true });
+    const ip = req.headers.get('x-forwarded-for')?.split(',')[0] ?? 'unknown';
+    if (isRateLimited(ip)) return NextResponse.json({ ok: true });
 
     // Formularios de recursos solo requieren nombre, empresa y email
     const isRecurso = !!fuente && !motivo;
