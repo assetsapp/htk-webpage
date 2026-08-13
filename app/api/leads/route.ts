@@ -4,13 +4,22 @@ import { sendCapiEvent } from '@/lib/capi';
 import { sendMail } from '@/lib/mail';
 
 function isValidToken(token: unknown): boolean {
-  if (typeof token !== 'string') return false;
-  const [ts, sig] = token.split('.');
-  if (!ts || !sig) return false;
-  const age = Date.now() - Number(ts);
-  if (age < 0 || age > 30 * 60 * 1000) return false; // expira en 30 min
-  const expected = createHmac('sha256', process.env.FORM_SECRET!).update(ts).digest('hex');
-  return sig === expected;
+  try {
+    const secret = process.env.FORM_SECRET;
+    if (!secret) { console.error('FORM_SECRET no configurado'); return false; }
+    if (typeof token !== 'string') return false;
+    const dotIndex = token.lastIndexOf('.');
+    if (dotIndex === -1) return false;
+    const ts = token.slice(0, dotIndex);
+    const sig = token.slice(dotIndex + 1);
+    if (!ts || !sig) return false;
+    const age = Date.now() - Number(ts);
+    if (age < 0 || age > 30 * 60 * 1000) return false;
+    const expected = createHmac('sha256', secret).update(ts).digest('hex');
+    return sig === expected;
+  } catch {
+    return false;
+  }
 }
 
 // Rate limiting en memoria: máx 3 envíos por IP cada 10 minutos
