@@ -105,8 +105,9 @@ export async function POST(req: NextRequest) {
     });
 
     const zohoData = await zohoRes.json();
-    const zohoFailed = zohoData.data?.[0]?.status === 'error';
-    if (zohoFailed) console.error('Zoho error:', zohoData.data[0]);
+    const zohoCode = zohoData.data?.[0]?.code;
+    const zohoFailed = zohoData.data?.[0]?.status === 'error' && zohoCode !== 'DUPLICATE_DATA';
+    if (zohoData.data?.[0]?.status === 'error') console.error('Zoho error:', zohoData.data[0]);
 
     // Enviar correo siempre, independiente del resultado de Zoho
     await sendMail({
