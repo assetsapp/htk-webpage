@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { renderToBuffer, Document, Page, Text, View, StyleSheet } from '@react-pdf/renderer';
 import React from 'react';
+import { sendMail } from '@/lib/mail';
 
 const ZOHO_TOKEN_URL = `https://accounts.zoho.${process.env.ZOHO_REGION}/oauth/v2/token`;
 const ZOHO_CONTACTS_URL = `https://www.zohoapis.${process.env.ZOHO_REGION}/crm/v2/Contacts`;
@@ -239,6 +240,22 @@ export async function POST(req: NextRequest) {
     } catch (e) {
       console.error('Zoho error (no crítico):', e);
     }
+
+    // Enviar correo de notificación
+    sendMail({
+      to: 'proyectos@htk-id.com, gabriel.h@htk-id.com, ventas@htk-id.com',
+      subject: `Nuevo recurso descargado: Checklist — ${nombre} (${empresa})`,
+      html: `
+        <h2>Descarga de Checklist de Control de Activos</h2>
+        <table cellpadding="6" cellspacing="0" border="1" style="border-collapse:collapse;font-family:sans-serif;font-size:14px;">
+          <tr><th align="left">Campo</th><th align="left">Valor</th></tr>
+          <tr><td>Nombre</td><td>${nombre}</td></tr>
+          <tr><td>Empresa</td><td>${empresa}</td></tr>
+          <tr><td>Email</td><td>${email}</td></tr>
+          <tr><td>Resultado</td><td>${pct}% (${score}/${total}) — Nivel: ${level}</td></tr>
+        </table>
+      `,
+    }).catch((err) => console.error('Error enviando correo de checklist:', err));
 
     // Generar PDF
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
