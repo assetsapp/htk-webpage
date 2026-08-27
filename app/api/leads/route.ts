@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { createHmac } from 'crypto';
 import { sendCapiEvent } from '@/lib/capi';
 import { sendMail } from '@/lib/mail';
+import { isValidPhone } from '@/lib/phone';
 
 function isValidToken(token: unknown): boolean {
   try {
@@ -71,6 +72,9 @@ export async function POST(req: NextRequest) {
     const isRecurso = !!fuente && !motivo;
     if (!nombre || !empresa || !email || (!isRecurso && (!motivo || !telefono || !apellido))) {
       return NextResponse.json({ error: 'Campos requeridos faltantes' }, { status: 400 });
+    }
+    if (!isRecurso && !isValidPhone(telefono)) {
+      return NextResponse.json({ error: 'Teléfono inválido' }, { status: 400 });
     }
 
     const accessToken = await getAccessToken();

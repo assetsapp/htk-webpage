@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { pushEvent } from '@/lib/gtm';
 import { trackMetaEvent } from '@/lib/meta';
+import { isValidPhone } from '@/lib/phone';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -54,6 +55,7 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
   const router = useRouter();
   const [form, setForm] = useState({ nombre: '', apellido: '', empresa: '', email: '', telefono: '', motivo: '', activos: '', comentarios: '' });
   const [formState, setFormState] = useState<FormState>('idle');
+  const [telefonoTouched, setTelefonoTouched] = useState(false);
   const [honeypot, setHoneypot] = useState('');
   const [loadedAt] = useState(() => Date.now());
   const [formToken, setFormToken] = useState('');
@@ -68,6 +70,10 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
+    if (!isValidPhone(form.telefono)) {
+      setTelefonoTouched(true);
+      return;
+    }
     setFormState('loading');
     try {
       const res = await fetch('/api/leads', {
@@ -87,7 +93,8 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
     }
   }
 
-  const isValid = form.nombre && form.apellido && form.empresa && form.email && form.telefono && form.motivo;
+  const telefonoValido = isValidPhone(form.telefono);
+  const isValid = form.nombre && form.apellido && form.empresa && form.email && telefonoValido && form.motivo;
 
   return (
     <div className="min-h-screen bg-surface-base">
@@ -189,11 +196,22 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
                     <div>
                       <label className="block text-xs font-medium text-ink-500 mb-1">Teléfono *</label>
                       <input
-                        required type="tel" value={form.telefono}
+                        required type="tel" inputMode="tel" value={form.telefono}
                         onChange={(e) => set('telefono', e.target.value)}
+                        onBlur={() => setTelefonoTouched(true)}
                         placeholder="+52 55 0000 0000"
-                        className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
+                        aria-invalid={telefonoTouched && !telefonoValido}
+                        className={`w-full px-3.5 py-2.5 bg-surface-alt border rounded-card text-sm text-ink focus:outline-none transition-colors ${
+                          telefonoTouched && !telefonoValido
+                            ? 'border-red-500 focus:border-red-500'
+                            : 'border-border-subtle focus:border-brand'
+                        }`}
                       />
+                      {telefonoTouched && !telefonoValido && (
+                        <p className="mt-1 text-xs text-red-500">
+                          Ingresa un teléfono válido (10 dígitos, lada de país opcional).
+                        </p>
+                      )}
                     </div>
 
                     <div>
