@@ -69,7 +69,7 @@ export async function POST(req: NextRequest) {
 
     // Formularios de recursos solo requieren nombre, empresa y email
     const isRecurso = !!fuente && !motivo;
-    if (!nombre || !empresa || !email || (!isRecurso && !motivo)) {
+    if (!nombre || !empresa || !email || (!isRecurso && (!motivo || !telefono || !apellido))) {
       return NextResponse.json({ error: 'Campos requeridos faltantes' }, { status: 400 });
     }
 

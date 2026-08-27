@@ -87,7 +87,7 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
     }
   }
 
-  const isValid = form.nombre && form.apellido && form.empresa && form.email && form.motivo;
+  const isValid = form.nombre && form.apellido && form.empresa && form.email && form.telefono && form.motivo;
 
   return (
     <div className="min-h-screen bg-surface-base">
@@ -187,9 +187,9 @@ export default function SesionPage({ faqs = [] }: { faqs?: { question: string; a
                     </div>
 
                     <div>
-                      <label className="block text-xs font-medium text-ink-500 mb-1">Teléfono</label>
+                      <label className="block text-xs font-medium text-ink-500 mb-1">Teléfono *</label>
                       <input
-                        type="tel" value={form.telefono}
+                        required type="tel" value={form.telefono}
                         onChange={(e) => set('telefono', e.target.value)}
                         placeholder="+52 55 0000 0000"
                         className="w-full px-3.5 py-2.5 bg-surface-alt border border-border-subtle rounded-card text-sm text-ink focus:outline-none focus:border-brand transition-colors"
