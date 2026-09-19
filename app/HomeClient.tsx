@@ -143,7 +143,7 @@ function LogoCarousel() {
               <img
                 src={client.logo}
                 alt={client.name}
-                loading={i < total ? 'eager' : 'lazy'}
+                loading="lazy"
                 decoding="async"
                 className={`${client.size ?? 'h-10'} w-auto object-contain opacity-60 hover:opacity-100 grayscale hover:grayscale-0 transition-all`}
               />
