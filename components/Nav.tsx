@@ -69,7 +69,7 @@ export default function Nav() {
       <div className="max-w-8xl mx-auto px-6 md:px-10 flex items-center justify-between h-20">
         {/* Logo */}
         <Link href="/" className="flex-shrink-0">
-          <img src="/htk-logo-navbar.webp" alt="HTK Identificación Inteligente" className="h-16 w-auto" width={155} height={64} fetchpriority="high" />
+          <img src="/htk-logo-navbar.webp" alt="HTK Identificación Inteligente" className="h-16 w-auto" width={155} height={64} fetchPriority="high" />
         </Link>
 
         {/* Desktop nav */}
