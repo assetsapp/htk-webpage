@@ -19,6 +19,7 @@ export async function sendMail(options: {
   to: string;
   subject: string;
   html: string;
+  attachments?: { filename: string; content: string; contentType: string }[];
 }) {
   return transporter.sendMail({
     from: `"${process.env.REPORT_SENDER ?? 'Tagventory'}" <${process.env.MAIL_TRANSPORTER_EMAIL}>`,
