@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
+    "test:webinar": "node --test scripts/test-webinar-registro.mjs",
     "nuevo-post": "node scripts/nuevo-post.mjs"
   },
   "dependencies": {
