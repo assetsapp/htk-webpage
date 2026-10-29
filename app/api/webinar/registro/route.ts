@@ -108,7 +108,7 @@ export async function POST(req: NextRequest) {
         'METHOD:REQUEST',
         'BEGIN:VEVENT',
         `UID:${uid}`,
-        `DTSTAMP:${new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15)}Z`,
+        `DTSTAMP:${new Date().toISOString().replace(/\D/g, '').slice(0, 15)}Z`,
         'DTSTART;TZID=America/Mexico_City:20261119T100000',
         'DTEND;TZID=America/Mexico_City:20261119T110000',
         `SUMMARY:Academia HTK Webinar #4 – ${WEBINAR_4.titulo}`,
