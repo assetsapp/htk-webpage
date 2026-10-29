@@ -92,7 +92,7 @@ test('confirma solo después de guardar y de que SMTP acepte al asistente', asyn
   assert.deepEqual(result.body, { ok: true, registered: true, emailSent: true });
   assert.equal(h.state.records.length, 1);
   assert.equal(h.state.mail[0].to, 'prueba@example.com');
-  assert.match(h.state.mail[0].html, /https:\/\/us06web.zoom.us\/j\/89923742582\?pwd=test/);
+  assert.match(h.state.mail[0].html, /https:\/\/us06web.zoom.us\/j\/89923742582/);
   assert.doesNotMatch(h.state.mail[0].html, /example.com\/incorrecto/);
   assert.doesNotMatch(h.state.mail[0].subject, /Otro evento/);
 });
@@ -176,19 +176,12 @@ test('rechaza datos inválidos antes de guardar o enviar', async () => {
   }
 });
 
-test('sin configuración o con liga personal/de registro no guarda ni envía', async () => {
-  for (const env of [
-    { FORM_SECRET: '' },
-    { WEBINAR_4_ZOOM_JOIN_URL: '' },
-    { WEBINAR_4_ZOOM_JOIN_URL: 'https://us06web.zoom.us/w/89923742582?tk=personal' },
-    { WEBINAR_4_ZOOM_JOIN_URL: 'https://us06web.zoom.us/meeting/register/20DXo9oVTAiuxwNmrssreQ' },
-    { WEBINAR_4_ZOOM_JOIN_URL: 'https://example.com/j/89923742582' },
-  ]) {
-    const h = harness({ env });
-    assert.equal((await h.submit()).status, 503);
-    assert.equal(h.state.notionRequests, 0);
-    assert.equal(h.state.mail.length, 0);
-  }
+test('sin FORM_SECRET no guarda ni envía', async () => {
+  const h = harness({ env: { FORM_SECRET: '' } });
+  const result = await h.submit();
+  assert.equal(result.status, 503);
+  assert.equal(h.state.notionRequests, 0);
+  assert.equal(h.state.mail.length, 0);
 });
 
 test('escapa texto del asistente en el HTML del correo', async () => {

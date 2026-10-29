@@ -39,11 +39,10 @@ function isRateLimited(ip: string): boolean {
 
 function getJoinLink(): string | null {
   try {
-    // Se configura en el servidor; nunca usar una liga enviada por el formulario.
-    const url = new URL(process.env.WEBINAR_4_ZOOM_JOIN_URL ?? '');
+    const url = new URL(WEBINAR_4.zoomJoinUrl);
     const zoomHost = /(^|\.)zoom\.(us|com)$/.test(url.hostname);
     if (url.protocol !== 'https:' || !zoomHost || url.username || url.password || url.port ||
-        !/^\/(j|w)\/89923742582\/?$/.test(url.pathname) || url.searchParams.has('tk')) return null;
+        !/^\/(j|w)\/\d+\/?$/.test(url.pathname) || url.searchParams.has('tk')) return null;
     return url.toString();
   } catch {
     return null;

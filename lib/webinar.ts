@@ -9,4 +9,5 @@ export const WEBINAR_4 = {
   ponente: 'Manrique Porras',
   ponenteRol: 'Finanzas y activos fijos',
   campana: 'Academia HTK · Webinar 4',
+  zoomJoinUrl: 'https://us06web.zoom.us/j/89923742582',
 };
