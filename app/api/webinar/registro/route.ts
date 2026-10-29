@@ -231,9 +231,9 @@ export async function POST(req: NextRequest) {
                 <td style="padding:18px 24px;">
                   <p style="margin:0 0 10px;font-size:12px;font-weight:700;color:#444;letter-spacing:0.5px;">AGREGAR AL CALENDARIO</p>
                   <p style="margin:0;font-size:13px;color:#686f79;">
-                    <a href="cid:webinar-htk-4.ics" style="color:#0D6BDE;text-decoration:none;margin-right:16px;">📅 Archivo .ics</a>
                     <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Academia+HTK+Webinar+%234&dates=20261119T160000Z%2F20261119T170000Z&details=Construyendo+control+real+de+activos.+Acceso%3A+${encodeURIComponent(zoomLink)}&location=${encodeURIComponent(zoomLink)}" style="color:#0D6BDE;text-decoration:none;margin-right:16px;">Google Calendar</a>
-                    <a href="https://calendar.yahoo.com/?v=60&title=Academia+HTK+Webinar+%234&st=20261119T160000Z&dur=0100&desc=Construyendo+control+real+de+activos.+Acceso%3A+${encodeURIComponent(zoomLink)}&in_loc=${encodeURIComponent(zoomLink)}" style="color:#0D6BDE;text-decoration:none;">Yahoo Calendar</a>
+                    <a href="https://calendar.yahoo.com/?v=60&title=Academia+HTK+Webinar+%234&st=20261119T160000Z&dur=0100&desc=Construyendo+control+real+de+activos.+Acceso%3A+${encodeURIComponent(zoomLink)}&in_loc=${encodeURIComponent(zoomLink)}" style="color:#0D6BDE;text-decoration:none;margin-right:16px;">Yahoo Calendar</a>
+                    <span style="color:#9ca3af;">· El archivo .ics viene adjunto en este correo</span>
                   </p>
                 </td>
               </tr>
