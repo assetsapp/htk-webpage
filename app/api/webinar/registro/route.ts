@@ -210,7 +210,7 @@ export async function POST(req: NextRequest) {
             </table>
 
             <!-- Botón Zoom -->
-            <table cellpadding="0" cellspacing="0" style="margin-bottom:32px;">
+            <table cellpadding="0" cellspacing="0" style="margin-bottom:16px;">
               <tr>
                 <td style="background:#0B1120;border-radius:8px;">
                   <a href="${escapeHtml(zoomLink)}" style="display:inline-block;padding:14px 28px;font-size:15px;font-weight:600;color:#ffffff;text-decoration:none;">
@@ -220,10 +220,24 @@ export async function POST(req: NextRequest) {
               </tr>
             </table>
 
-            <p style="margin:0 0 8px;font-size:13px;color:#686f79;line-height:1.6;">
-              Si el botón no funciona, copia este enlace en tu navegador:<br>
+            <p style="margin:0 0 24px;font-size:13px;color:#686f79;line-height:1.6;">
+              Si el botón no funciona, copia este enlace:<br>
               <a href="${escapeHtml(zoomLink)}" style="color:#0D6BDE;word-break:break-all;">${escapeHtml(zoomLink)}</a>
             </p>
+
+            <!-- Agregar al calendario -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="background:#F7F9FA;border:1px solid #E5E8EB;border-radius:10px;margin-bottom:32px;">
+              <tr>
+                <td style="padding:18px 24px;">
+                  <p style="margin:0 0 10px;font-size:12px;font-weight:700;color:#444;letter-spacing:0.5px;">AGREGAR AL CALENDARIO</p>
+                  <p style="margin:0;font-size:13px;color:#686f79;">
+                    <a href="cid:webinar-htk-4.ics" style="color:#0D6BDE;text-decoration:none;margin-right:16px;">📅 Archivo .ics</a>
+                    <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Academia+HTK+Webinar+%234&dates=20261119T160000Z%2F20261119T170000Z&details=Construyendo+control+real+de+activos.+Acceso%3A+${encodeURIComponent(zoomLink)}&location=${encodeURIComponent(zoomLink)}" style="color:#0D6BDE;text-decoration:none;margin-right:16px;">Google Calendar</a>
+                    <a href="https://calendar.yahoo.com/?v=60&title=Academia+HTK+Webinar+%234&st=20261119T160000Z&dur=0100&desc=Construyendo+control+real+de+activos.+Acceso%3A+${encodeURIComponent(zoomLink)}&in_loc=${encodeURIComponent(zoomLink)}" style="color:#0D6BDE;text-decoration:none;">Yahoo Calendar</a>
+                  </p>
+                </td>
+              </tr>
+            </table>
           </td>
         </tr>
 
