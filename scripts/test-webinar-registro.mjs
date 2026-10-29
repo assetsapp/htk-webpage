@@ -58,7 +58,7 @@ function harness(options = {}) {
     '@/lib/mail': {
       sendMail: async mail => {
         state.mail.push(mail);
-        if (mail.to === 'marketing@htk-id.com') {
+        if (mail.to.includes('marketing@htk-id.com')) {
           if (options.internalMailFailure) throw new Error('SMTP interno no disponible');
         } else {
           if (options.smtpFailure) throw new Error('SMTP no disponible');
