@@ -275,7 +275,7 @@ export async function POST(req: NextRequest) {
 
     // Notificación interna a HTK
     await sendMail({
-      to: 'marketing@htk-id.com, sistemas@htk-id.com',
+      to: 'marketing@htk-id.com, sistemas@htk-id.com, ventas@htk-id.com',
       subject: `Nuevo registro webinar: ${nombre.trim()} — ${empresa?.trim() || 'Sin empresa'}`,
       html: `
         <h2 style="font-family:sans-serif;">Nuevo registro de webinar</h2>
