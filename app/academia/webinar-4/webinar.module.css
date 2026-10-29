@@ -177,11 +177,12 @@
   .intro h2 { font-size: 29px; }
   .eyebrow { font-size: 9px; margin-bottom: 12px; }
   .description { margin-top: 14px; font-size: 14px; line-height: 1.8; }
-  .registration { position: static; width: 100%; padding: 24px; scroll-margin-top: 16px; }
+  .registration { position: static; width: 100%; padding: 24px; scroll-margin-top: 16px; order: 2; }
   .registration h2 { font-size: 27px; }
   .form { gap: 18px; }
   .deliveryNote { font-size: 10px; }
-  .details { width: 100%; padding-top: 0; }
+  .intro { order: 0; }
+  .details { width: 100%; padding-top: 0; order: 1; }
   .speaker { padding: 18px; gap: 18px; margin-top: 26px; }
   .speakerPhoto { width: 90px; }
   .speaker h3 { font-size: 21px; }
