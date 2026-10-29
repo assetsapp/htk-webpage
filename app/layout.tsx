@@ -1,10 +1,8 @@
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
-import Nav from '@/components/Nav';
-import Footer from '@/components/Footer';
+import { SiteHeader, SiteFooter } from '@/components/SiteChrome';
 import ScrollToTop from '@/components/ScrollToTop';
-import WhatsAppButton from '@/components/WhatsAppButton';
 import { SITE_URL, SITE_NAME, DEFAULT_DESCRIPTION, organizationSchema } from '@/lib/seo';
 import { GTM_ID, META_PIXEL_ID } from '@/lib/gtm';
 
@@ -102,10 +100,9 @@ s.parentNode.insertBefore(b, s);})(window.lintrk);`,
           />
         </noscript>
         <ScrollToTop />
-        <Nav />
+        <SiteHeader />
         <main className="flex-1">{children}</main>
-        <Footer />
-        <WhatsAppButton />
+        <SiteFooter />
       </body>
     </html>
   );

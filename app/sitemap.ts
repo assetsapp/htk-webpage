@@ -17,6 +17,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/recursos/autodiagnostico-control-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/recursos/calculadora-roi-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
     { url: `${SITE_URL}/recursos/checklist-control-activos`, lastModified: now, changeFrequency: 'monthly', priority: 0.8 },
+
+    { url: `${SITE_URL}/academia/webinar-4`, lastModified: now, changeFrequency: 'weekly', priority: 0.9 },
   ];
 
   const blogPages: MetadataRoute.Sitemap = getAllPostsMeta().map((p) => ({
