@@ -97,6 +97,32 @@ export async function POST(req: NextRequest) {
     }
     const webinar = WEBINAR_4.campana;
 
+    function buildIcs(attendeeEmail: string, attendeeName: string): string {
+      const uid = `webinar-4-${attendeeEmail.replace(/[^a-z0-9]/gi, '')}@htk-id.com`;
+      const desc = `${WEBINAR_4.subtitulo}\\n\\nPonente: ${WEBINAR_4.ponente}\\n\\nAcceso: ${zoomLink}`;
+      return [
+        'BEGIN:VCALENDAR',
+        'VERSION:2.0',
+        'PRODID:-//HTK Identificación Inteligente//Webinar//ES',
+        'CALSCALE:GREGORIAN',
+        'METHOD:REQUEST',
+        'BEGIN:VEVENT',
+        `UID:${uid}`,
+        `DTSTAMP:${new Date().toISOString().replace(/[-:.]/g, '').slice(0, 15)}Z`,
+        'DTSTART;TZID=America/Mexico_City:20261119T100000',
+        'DTEND;TZID=America/Mexico_City:20261119T110000',
+        `SUMMARY:Academia HTK Webinar #4 – ${WEBINAR_4.titulo}`,
+        `DESCRIPTION:${desc}`,
+        `LOCATION:${zoomLink}`,
+        `URL:${zoomLink}`,
+        'ORGANIZER;CN=Academia HTK:mailto:ventas@htk-id.com',
+        `ATTENDEE;ROLE=REQ-PARTICIPANT;RSVP=TRUE;CN=${attendeeName}:mailto:${attendeeEmail}`,
+        'STATUS:CONFIRMED',
+        'END:VEVENT',
+        'END:VCALENDAR',
+      ].join('\r\n');
+    }
+
     // Guardar en Notion
     await addWebinarRegistrant({
       nombre, email, telefono, empresa, campana: webinar,
@@ -107,6 +133,11 @@ export async function POST(req: NextRequest) {
       const confirmation = await sendMail({
         to: email,
         subject: `Confirmación de registro: ${webinar}`,
+        attachments: [{
+          filename: 'webinar-htk-4.ics',
+          content: buildIcs(email, nombre),
+          contentType: 'text/calendar; charset=utf-8; method=REQUEST',
+        }],
         html: `
 <!DOCTYPE html>
 <html lang="es">
@@ -202,7 +233,7 @@ export async function POST(req: NextRequest) {
             <hr style="border:none;border-top:1px solid #E5E8EB;margin:0 0 24px;">
             <p style="margin:0 0 4px;font-size:13px;color:#444;">¿Tienes preguntas?</p>
             <p style="margin:0;font-size:13px;color:#686f79;">
-              Escríbenos a <a href="mailto:marketing@htk-id.com" style="color:#0D6BDE;">marketing@htk-id.com</a>
+              Escríbenos a <a href="mailto:ventas@htk-id.com" style="color:#0D6BDE;">ventas@htk-id.com</a>
             </p>
             <p style="margin:16px 0 0;font-size:12px;color:#9ca3af;">© 2026 HTK Identificación Inteligente</p>
           </td>
